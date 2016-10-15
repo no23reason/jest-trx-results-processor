@@ -1,0 +1,28 @@
+{
+  "name": "jest-trx-results-processor",
+  "version": "0.0.1",
+  "description": "Jest results processor for exporting into TRX files for Visual Studio",
+  "main": "dist/index.js",
+  "repository": {
+    "url": "https://github.com/no23reason/jest-trx-results-processor",
+    "type": "git"
+  },
+  "author": "Dan Homola",
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "test:tslint": "tslint --project ."
+  },
+  "dependencies": {
+    "uuid": "~2.0.3",
+    "xmlbuilder": "~8.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.45",
+    "@types/uuid": "^2.0.29",
+    "@types/xmlbuilder": "^0.0.28",
+    "tslint": "~3.15.1",
+    "typescript": "~2.0.3"
+  }
+}
