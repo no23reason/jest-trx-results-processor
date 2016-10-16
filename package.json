@@ -2,14 +2,23 @@
   "name": "jest-trx-results-processor",
   "version": "0.0.1",
   "description": "Jest results processor for exporting into TRX files for Visual Studio",
+  "author": "Dan Homola",
+  "user": "no23reason",
+  "license": "MIT",
   "main": "dist/index.js",
   "repository": {
     "url": "https://github.com/no23reason/jest-trx-results-processor",
     "type": "git"
   },
-  "author": "Dan Homola",
-  "user": "no23reason",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/no23reason/jest-trx-results-processor/issues"
+  },
+  "keywords": [
+    "jest",
+    "jestjs",
+    "jest-cli",
+    "trx"
+  ],
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",

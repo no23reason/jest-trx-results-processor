@@ -13,7 +13,6 @@
     "jest-trx-results-processor": "~0.0.1"
   },
   "jest": {
-    "testRegex": "tests",
     "testResultsProcessor": "scripts/jestTrxProcessor"
   }
 }
