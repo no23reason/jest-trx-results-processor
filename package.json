@@ -1,6 +1,6 @@
 {
   "name": "jest-trx-results-processor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Jest results processor for exporting into TRX files for Visual Studio",
   "author": "Dan Homola",
   "user": "no23reason",
