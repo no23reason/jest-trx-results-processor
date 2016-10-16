@@ -1,0 +1,19 @@
+{
+  "name": "jest-trx-results-processor-example",
+  "description": "Example for jest-trx-results-processor",
+  "author": "Dan Homola",
+  "user": "no23reason",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^16.0.1",
+    "jest-trx-results-processor": "~0.0.1"
+  },
+  "jest": {
+    "testRegex": "tests",
+    "testResultsProcessor": "scripts/jestTrxProcessor"
+  }
+}
