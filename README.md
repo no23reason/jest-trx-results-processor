@@ -1,3 +1,8 @@
+[![build status](https://secure.travis-ci.org/no23reason/jest-trx-results-processor.svg)](http://travis-ci.org/no23reason/jest-trx-results-processor)
+[![npm version](https://img.shields.io/npm/v/jest-trx-results-processor.svg)](https://www.npmjs.com/package/jest-trx-results-processor)
+[![bitHound Score](https://www.bithound.io/github/no23reason/jest-trx-results-processor/badges/score.svg)](https://www.bithound.io/github/no23reason/jest-trx-results-processor)
+[![Dependency Status](https://david-dm.org/no23reason/jest-trx-results-processor.svg)](https://david-dm.org/no23reason/jest-trx-results-processor)
+
 # jest-trx-results-processor
 This package is used to export a TRX file from [Jest](https://facebook.github.io/jest/) test runs to be used in [Visual Studio](https://www.visualstudio.com/) and [Visual Studio Team Services](https://www.visualstudio.com/vsts-test/).
 
@@ -27,18 +32,12 @@ module.exports = processor;
 Finally point Jest to your results processor in the `package.json`:
 ```json
 {
-  ...
   "devDependencies": {
-    ...
     "jest": "^16.0.1",
-    "jest-trx-results-processor": "~0.0.1",
-    ...
+    "jest-trx-results-processor": "~0.0.3",
   },
-  ...
   "jest": {
-    ...
     "testResultsProcessor": "scripts/jestTrxProcessor",
-    ...
   }
 }
 ```
