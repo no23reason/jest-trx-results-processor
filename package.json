@@ -8,10 +8,12 @@
     "type": "git"
   },
   "author": "Dan Homola",
+  "user": "no23reason",
   "license": "MIT",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
+    "test": "npm run test:tslint",
     "test:tslint": "tslint --project ."
   },
   "dependencies": {

@@ -3,7 +3,8 @@ import * as uuid from "uuid";
 import * as os from "os";
 import { writeFileSync } from "fs";
 
-type UnixTime = number;
+// Type definitions
+type Epoch = number;
 
 type JestTestResult = {
   ancestorTitles: string[]; // array of messages in describe blocks
@@ -19,8 +20,8 @@ type JestTestSuiteResult = {
   numPassingTests: number;
   numPendingTests: number;
   perfStats: {
-    start: UnixTime;
-    end: UnixTime;
+    start: Epoch;
+    end: Epoch;
   };
   testFilePath: string; // absolute path to test file;
   testResults: JestTestResult[];
@@ -28,7 +29,7 @@ type JestTestSuiteResult = {
 
 type JestTestRunResult = {
   success: boolean;
-  startTime: UnixTime;
+  startTime: Epoch;
   numTotalTestSuites: number;
   numPassedTestSuites: number;
   numFailedTestSuites: number;
@@ -40,10 +41,18 @@ type JestTestRunResult = {
   testResults: JestTestSuiteResult[];
 }
 
+// Magic GUID's and other constants
 const testListNotInListId = "8c84fa94-04c1-424b-9868-57a2d4851a1d";
 const testListAllLoadedResultsId = "19431567-8539-422a-85d7-44ee4e166bda";
 const testType = "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b";
 
+const testOutcomeTable: { [outcome: string]: string } = {
+  "failed": "Failed",
+  "pending": "Skipped",
+  "passed": "Passed"
+};
+
+// Auxilliary functions
 const getFullTestName = (testResult: JestTestResult): string =>
   testResult.ancestorTitles && testResult.ancestorTitles.length
     ? `${testResult.ancestorTitles.join(" / ")} / ${testResult.title}`
@@ -55,9 +64,10 @@ const getTestClassName = (testResult: JestTestResult): string =>
     : "No suite";
 
 const getSuitePerTestDuration = (testSuiteResult: JestTestSuiteResult): number =>
-  // take the total duration of suite and divide it by the number of tests (Jest does not provide per test info)
+  // take the total duration of suite and divide it by the number of tests (Jest does not provide per test performance info)
   Math.floor((testSuiteResult.perfStats.end - testSuiteResult.perfStats.start) / (testSuiteResult.numPassingTests + testSuiteResult.numFailingTests));
 
+// Adapted from https://github.com/hatchteam/karma-trx-reporter
 const formatDuration = (duration: number): string => {
   let durationInner = duration | 0;
   const ms = durationInner % 1000;
@@ -77,14 +87,22 @@ const formatDuration = (duration: number): string => {
     (ms < 10 ? "00" + ms : ms < 100 ? "0" + ms : ms);
 };
 
-const testOutcomeTable: {[outcome: string]: string} = {
-  "failed": "Failed",
-  "pending": "Skipped",
-  "passed": "Passed"
-};
+// Main processing function
+/**
+ * All the configuration options.
+ */
+interface Options {
+  /**
+   * Path to the resulting TRX file.
+   * @default "test-results.trx"
+   */
+  outputFile: string;
+}
 
-const processor = (testRunResult: JestTestRunResult): void => {
-  console.log("Generating TRX file...");
+const processor = (options: Options = {
+  outputFile: "test-results.trx",
+}) => (testRunResult: JestTestRunResult): JestTestRunResult => {
+  process.stdout.write("Generating TRX file...");
   const computerName = os.hostname();
   const userName = process.env.SUDO_USER ||
     process.env.LOGNAME ||
@@ -98,6 +116,7 @@ const processor = (testRunResult: JestTestRunResult): void => {
     .att("name", `${userName}@${computerName} ${new Date(testRunResult.startTime).toISOString()}`)
     .att("runUser", userName)
     .att("xmlns", "http://microsoft.com/schemas/VisualStudio/TeamTest/2010");
+
   // TestSettings
   resultBuilder.ele("TestSettings")
     .att("name", "Jest test run")
@@ -135,10 +154,12 @@ const processor = (testRunResult: JestTestRunResult): void => {
   testRunResult.testResults.forEach(testSuiteResult => {
     const perTestDuration = getSuitePerTestDuration(testSuiteResult);
     const perTestDurationFormatted = formatDuration(perTestDuration);
+
     testSuiteResult.testResults.forEach((testResult, index) => {
       const testId = uuid.v4();
       const executionId = uuid.v4();
       const fullTestName = getFullTestName(testResult);
+
       // UnitTest
       const unitTest = testDefinitions.ele("UnitTest")
         .att("name", fullTestName)
@@ -176,9 +197,12 @@ const processor = (testRunResult: JestTestRunResult): void => {
   });
 
   const xml = resultBuilder.end({ pretty: true });
-  // console.log(xml);
-  writeFileSync("jest-test-results.trx", xml, { encoding: "utf8" });
-  console.log("TRX file output to jest-test-results.trx");
+  writeFileSync(options.outputFile, xml, { encoding: "utf8" });
+  process.stdout.write("DONE\n");
+  process.stdout.write(`TRX file output to '${options.outputFile}'\n`);
+
+  // Return the input testRunResult to allow for chaining other result processors
+  return testRunResult;
 };
 
 export = processor;
