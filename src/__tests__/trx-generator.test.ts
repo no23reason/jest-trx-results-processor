@@ -1,9 +1,10 @@
 import "jest";
 import { generateTrx } from "../trx-generator";
 import { JestTestRunResult } from "../types";
+import xml2js = require("xml2js");
 
 describe("trx-generator", (): void => {
-  it("processes the results correctly", (): void => {
+  it("processes the results correctly", (done): void => {
     const input: JestTestRunResult = {
       success: true,
       startTime: 1478771929,
@@ -46,6 +47,18 @@ describe("trx-generator", (): void => {
       ],
     };
     const result: string = generateTrx(input);
-    expect(result).toMatchSnapshot();
+    xml2js.parseString(result, (err, parsed) => {
+      expect(err).toBeFalsy();
+      expect(parsed).toBeTruthy();
+      expect(parsed.TestRun).toBeTruthy();
+      expect(parsed.TestRun.$).toBeTruthy();
+      expect(parsed.TestRun.$.xmlns).toEqual("http://microsoft.com/schemas/VisualStudio/TeamTest/2010");
+      expect(parsed.TestRun.Results).toBeTruthy();
+      expect(parsed.TestRun.Results.length).toEqual(1);
+      expect(parsed.TestRun.Results[0].UnitTestResult.length).toEqual(2);
+      expect(parsed.TestRun.Results[0].UnitTestResult[0].$.outcome).toEqual("Passed");
+      expect(parsed.TestRun.Results[0].UnitTestResult[1].$.outcome).toEqual("Failed");
+      done();
+    });
   });
 });
