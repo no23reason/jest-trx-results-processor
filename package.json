@@ -1,9 +1,9 @@
 {
   "name": "jest-trx-results-processor",
-  "version": "0.0.3",
   "description": "Jest results processor for exporting into TRX files for Visual Studio",
   "author": "Dan Homola",
   "user": "no23reason",
+  "version": "0.0.0-semantic-release",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {
@@ -23,7 +23,8 @@
     "prepublish": "npm run build",
     "build": "tsc",
     "test": "npm run test:tslint",
-    "test:tslint": "tslint --project ."
+    "test:tslint": "tslint --project .",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
     "uuid": "~2.0.3",
@@ -35,6 +36,7 @@
     "@types/xmlbuilder": "^0.0.28",
     "commitizen": "^2.8.6",
     "cz-conventional-changelog": "^1.2.0",
+    "semantic-release": "^4.3.5",
     "tslint": "~3.15.1",
     "typescript": "~2.0.3"
   },
