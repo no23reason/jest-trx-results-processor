@@ -2,6 +2,7 @@
 [![npm version](https://img.shields.io/npm/v/jest-trx-results-processor.svg)](https://www.npmjs.com/package/jest-trx-results-processor)
 [![bitHound Score](https://www.bithound.io/github/no23reason/jest-trx-results-processor/badges/score.svg)](https://www.bithound.io/github/no23reason/jest-trx-results-processor)
 [![Dependency Status](https://david-dm.org/no23reason/jest-trx-results-processor.svg)](https://david-dm.org/no23reason/jest-trx-results-processor)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # jest-trx-results-processor
 This package is used to export a TRX file from [Jest](https://facebook.github.io/jest/) test runs to be used in [Visual Studio](https://www.visualstudio.com/) and [Visual Studio Team Services](https://www.visualstudio.com/vsts-test/).
