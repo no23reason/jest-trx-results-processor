@@ -64,4 +64,50 @@ describe("trx-generator", (): void => {
       done();
     });
   });
+
+  it("handles error message with invalid XML chars correctly", (): void => {
+    const input: JestTestRunResult = {
+      success: true,
+      startTime: 1478771929,
+      numTotalTestSuites: 1,
+      numPassedTestSuites: 0,
+      numFailedTestSuites: 1,
+      numRuntimeErrorTestSuites: 0,
+      numTotalTests: 2,
+      numPassedTests: 1,
+      numFailedTests: 1,
+      numPendingTests: 0,
+      testResults: [
+        {
+          coverage: {},
+          numFailingTests: 1,
+          numPassingTests: 1,
+          numPendingTests: 0,
+          perfStats: {
+            start: 1478771929,
+            end: 1478778929,
+          },
+          testFilePath: "C:\\testPath\\test.js",
+          testResults: [
+            {
+              ancestorTitles: ["foo's", "bar method"];
+              failureMessages: [];
+              numPassingAsserts: 1;
+              status: "passed";
+              title: "works well";
+            },
+            {
+              ancestorTitles: ["foo's", "bar method"];
+              failureMessages: ["This did not go as planned\uDFFF"];
+              numPassingAsserts: 1;
+              status: "failed";
+              title: "works not so well";
+            }
+          ]
+        }
+      ],
+    };
+    const result: string = generateTrx(input);
+    expect(result).toBeTruthy();
+  });
 });

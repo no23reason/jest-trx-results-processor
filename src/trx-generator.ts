@@ -50,6 +50,9 @@ const formatDuration = (duration: number): string => {
     (ms < 10 ? "00" + ms : ms < 100 ? "0" + ms : ms);
 };
 
+const sanitizationRegex = /[\u0000-\u0008\u000B-\u000C\u000E-\u001F\uD800-\uDFFF\uFFFE-\uFFFF]/g;
+const sanitizeString = (str: string): string => str && str.replace(sanitizationRegex, ""); // removes the characters that make xmlbuilder throw
+
 export const generateTrx = (testRunResult: JestTestRunResult): string => {
   const computerName = os.hostname();
   const userName = process.env.SUDO_USER ||
@@ -139,7 +142,7 @@ export const generateTrx = (testRunResult: JestTestRunResult): string => {
         .att("testListId", testListNotInListId);
 
       if (testResult.status === "failed") {
-        result.ele("Output").ele("ErrorInfo").ele("Message", testResult.failureMessages.join("\n"));
+        result.ele("Output").ele("ErrorInfo").ele("Message", sanitizeString(testResult.failureMessages.join("\n")));
       }
     });
   });
