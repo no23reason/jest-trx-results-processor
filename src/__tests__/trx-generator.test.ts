@@ -60,7 +60,7 @@ describe("trx-generator", (): void => {
       expect(parsed.TestRun.Results[0].UnitTestResult[0].$.duration).toEqual("00:00:03.500");
       expect(parsed.TestRun.Results[0].UnitTestResult[1].$.outcome).toEqual("Failed");
       expect(parsed.TestRun.Results[0].UnitTestResult[1].$.duration).toEqual("00:00:03.500");
-      
+
       done();
     });
   });
