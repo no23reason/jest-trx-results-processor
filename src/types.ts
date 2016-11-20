@@ -31,7 +31,7 @@ export type JestTestResult = {
    * @type {string}
    */
   title: string;
-}
+};
 
 export type JestTestSuiteResult = {
   /**
@@ -161,4 +161,4 @@ export type JestTestRunResult = {
    * @type {JestTestSuiteResult[]}
    */
   testResults: JestTestSuiteResult[];
-}
+};
