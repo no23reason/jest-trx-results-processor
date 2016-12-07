@@ -43,7 +43,7 @@
     "jest": "^17.0.0",
     "semantic-release": "^6.3.2",
     "tslint": "~4.0.1",
-    "typescript": "~2.0.9",
+    "typescript": "~2.1.4",
     "xml2js": "^0.4.17"
   },
   "config": {
