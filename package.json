@@ -34,9 +34,9 @@
   },
   "devDependencies": {
     "@types/jest": "^16.0.0",
-    "@types/node": "^6.0.45",
+    "@types/node": "^7.0.0",
     "@types/uuid": "^2.0.29",
-    "@types/xml2js": "^0.0.28",
+    "@types/xml2js": "^0.0.32",
     "@types/xmlbuilder": "^0.0.28",
     "commitizen": "^2.9.5",
     "cz-conventional-changelog": "^1.2.0",
