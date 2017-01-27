@@ -6,6 +6,8 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 # jest-trx-results-processor
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/no23reason/jest-trx-results-processor.svg)](https://greenkeeper.io/)
 This package is used to export a TRX file from [Jest](https://facebook.github.io/jest/) test runs to be used in [Visual Studio](https://www.visualstudio.com/) and [Visual Studio Team Services](https://www.visualstudio.com/vsts-test/).
 
 ## Usage
