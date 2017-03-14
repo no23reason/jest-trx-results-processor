@@ -35,11 +35,11 @@ Finally point Jest to your results processor in the `package.json`:
 ```json
 {
   "devDependencies": {
-    "jest": "^16.0.1",
-    "jest-trx-results-processor": "~0.0.3",
+    "jest": "^19.0.0",
+    "jest-trx-results-processor": "~0.0.5",
   },
   "jest": {
-    "testResultsProcessor": "scripts/jestTrxProcessor",
+    "testResultsProcessor": "./scripts/jestTrxProcessor"
   }
 }
 ```
