@@ -28,7 +28,7 @@ const getTestClassName = (testResult: JestTestResult): string =>
 
 const getSuitePerTestDuration = (testSuiteResult: JestTestSuiteResult): number =>
   // take the total duration of suite and divide it by the number of tests (Jest does not provide per test performance info)
-  Math.floor((testSuiteResult.perfStats.end - testSuiteResult.perfStats.start) / (testSuiteResult.numPassingTests + testSuiteResult.numFailingTests));
+  Math.floor((testSuiteResult.perfStats.end - testSuiteResult.perfStats.start) / (testSuiteResult.numPassingTests + testSuiteResult.numFailingTests + testSuiteResult.numPendingTests));
 
 // Adapted from https://github.com/hatchteam/karma-trx-reporter
 const formatDuration = (duration: number): string => {
