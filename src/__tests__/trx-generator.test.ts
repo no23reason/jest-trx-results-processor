@@ -110,4 +110,72 @@ describe("trx-generator", (): void => {
     const result: string = generateTrx(input);
     expect(result).toBeTruthy();
   });
+
+  it("handles skipped test suites", (): void => {
+    const input: JestTestRunResult = {
+      "numFailedTestSuites": 0,
+      "numFailedTests": 0,
+      "numPassedTestSuites": 0,
+      "numPassedTests": 0,
+      "numPendingTestSuites": 1,
+      "numPendingTests": 1,
+      "numRuntimeErrorTestSuites": 0,
+      "numTotalTestSuites": 1,
+      "numTotalTests": 1,
+      "snapshot": {
+        "added": 0,
+        "didUpdate": false,
+        "failure": false,
+        "filesAdded": 0,
+        "filesRemoved": 0,
+        "filesUnmatched": 0,
+        "filesUpdated": 0,
+        "matched": 0,
+        "total": 0,
+        "unchecked": 0,
+        "unmatched": 0,
+        "updated": 0
+      },
+      "startTime": 1511376995239,
+      "success": true,
+      "testResults": [
+        {
+          "console": null,
+          "failureMessage": null,
+          "numFailingTests": 0,
+          "numPassingTests": 0,
+          "numPendingTests": 1,
+          "perfStats": {
+            "end": 1511376996104,
+            "start": 1511376995923
+          },
+          "snapshot": {
+            "added": 0,
+            "fileDeleted": false,
+            "matched": 0,
+            "unchecked": 0,
+            "unmatched": 0,
+            "updated": 0
+          },
+          "testFilePath": "C:\\Users\\Github\\test\\test.spec.js",
+          "testResults": [
+            {
+              "ancestorTitles": [],
+              "duration": 0,
+              "failureMessages": [],
+              "fullName": "first",
+              "numPassingAsserts": 0,
+              "status": "pending",
+              "title": "first"
+            }
+          ],
+          "sourceMaps": {},
+          "skipped": true
+        }
+      ],
+      "wasInterrupted": false
+    };
+    const result: string = generateTrx(input);
+    expect(result).toBeTruthy();
+  });
 });
