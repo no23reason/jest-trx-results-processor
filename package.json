@@ -40,8 +40,9 @@
     "@types/xmlbuilder": "^0.0.28",
     "commitizen": "^2.9.5",
     "cz-conventional-changelog": "^1.2.0",
-    "jest": "^18.1.0",
+    "jest": "^22.3.0",
     "semantic-release": "^6.3.2",
+    "ts-jest": "^22.0.4",
     "tslint": "~4.4.2",
     "typescript": "~2.1.5",
     "xml2js": "^0.4.17"
@@ -57,7 +58,7 @@
       "js"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/lib/preprocessor.js"
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
   }
