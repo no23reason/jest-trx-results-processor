@@ -1,12 +1,16 @@
 import { writeFileSync } from "fs";
 
-import { JestTestResult, JestTestRunResult, JestTestSuiteResult } from "./types";
 import { generateTrx } from "./trx-generator";
+import {
+  JestTestResult,
+  JestTestRunResult,
+  JestTestSuiteResult,
+} from "./types";
 
 /**
  * All the configuration options.
  */
-interface Options {
+interface IOptions {
   /**
    * Path to the resulting TRX file.
    * @default "test-results.trx"
@@ -14,9 +18,11 @@ interface Options {
   outputFile: string;
 }
 
-const processor = (options: Options = {
-  outputFile: "test-results.trx",
-}) => (testRunResult: JestTestRunResult): JestTestRunResult => {
+const processor = (
+  options: IOptions = {
+    outputFile: "test-results.trx",
+  },
+) => (testRunResult: JestTestRunResult): JestTestRunResult => {
   process.stdout.write("Generating TRX file...");
 
   const trx = generateTrx(testRunResult);
