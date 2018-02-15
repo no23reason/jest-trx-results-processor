@@ -26,24 +26,24 @@
     "test:ci": "npm run test:tslint && npm test",
     "test:tdd": "jest --watch",
     "test:tslint": "tslint --project .",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "uuid": "~3.0.0",
     "xmlbuilder": "~8.2.2"
   },
   "devDependencies": {
-    "@types/jest": "^16.0.0",
-    "@types/node": "^7.0.0",
+    "@types/jest": "^22.1.2",
     "@types/uuid": "^2.0.29",
     "@types/xml2js": "^0.0.32",
     "@types/xmlbuilder": "^0.0.28",
     "commitizen": "^2.9.5",
-    "cz-conventional-changelog": "^1.2.0",
-    "jest": "^18.1.0",
-    "semantic-release": "^6.3.2",
-    "tslint": "~4.4.2",
-    "typescript": "~2.1.5",
+    "cz-conventional-changelog": "^2.1.0",
+    "jest": "^22.3.0",
+    "semantic-release": "^12.4.1",
+    "ts-jest": "^22.0.4",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.1",
     "xml2js": "^0.4.17"
   },
   "config": {
@@ -57,7 +57,7 @@
       "js"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/lib/preprocessor.js"
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
   }
