@@ -34,7 +34,6 @@
   },
   "devDependencies": {
     "@types/jest": "^22.1.2",
-    "@types/node": "^7.0.0",
     "@types/uuid": "^2.0.29",
     "@types/xml2js": "^0.0.32",
     "@types/xmlbuilder": "^0.0.28",
