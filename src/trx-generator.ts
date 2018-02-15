@@ -16,7 +16,7 @@ const testType = "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b";
 const testOutcomeTable: { [outcome: string]: string } = {
   failed: "Failed",
   passed: "Passed",
-  pending: "Skipped",
+  pending: "NotExecuted",
 };
 
 // Auxilliary functions
