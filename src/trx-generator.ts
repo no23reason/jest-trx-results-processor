@@ -1,6 +1,6 @@
-import * as builder from "xmlbuilder";
-import * as uuid from "uuid";
 import * as os from "os";
+import * as uuid from "uuid";
+import * as builder from "xmlbuilder";
 
 import { JestTestResult, JestTestRunResult, JestTestSuiteResult } from "./types";
 
@@ -10,9 +10,9 @@ const testListAllLoadedResultsId = "19431567-8539-422a-85d7-44ee4e166bda";
 const testType = "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b";
 
 const testOutcomeTable: { [outcome: string]: string } = {
-  "failed": "Failed",
-  "pending": "Skipped",
-  "passed": "Passed"
+  failed: "Failed",
+  passed: "Passed",
+  pending: "Skipped",
 };
 
 // Auxilliary functions
@@ -32,7 +32,7 @@ const getSuitePerTestDuration = (testSuiteResult: JestTestSuiteResult): number =
 
 // Adapted from https://github.com/hatchteam/karma-trx-reporter
 const formatDuration = (duration: number): string => {
-  let durationInner = duration | 0;
+  let durationInner = duration || 0;
   const ms = durationInner % 1000;
   durationInner -= ms;
   const s = (durationInner / 1000) % 60;

@@ -1,6 +1,6 @@
 export type Epoch = number;
 
-export type SnapshotTestRunStats = {
+export interface SnapshotTestRunStats {
   added: number;
   didUpdate: boolean;
   failure: boolean;
@@ -13,18 +13,18 @@ export type SnapshotTestRunStats = {
   unchecked: number;
   unmatched: number;
   updated: number;
-};
+}
 
-export type SnapshotTestStats = {
+export interface SnapshotTestStats {
   added: number;
   fileDeleted: boolean;
   matched: number;
   unchecked: number;
   unmatched: number;
   updated: number;
-};
+}
 
-export type JestTestResult = {
+export interface JestTestResult {
   /**
    * Array of messages in the 'describe' blocks surrounding the test.
    *
@@ -67,9 +67,9 @@ export type JestTestResult = {
    * @type {string}
    */
   title: string;
-};
+}
 
-export type JestTestSuiteResult = {
+export interface JestTestSuiteResult {
   /**
    * Test coverage information.
    *
@@ -146,9 +146,9 @@ export type JestTestSuiteResult = {
    * @type {JestTestResult[]}
    */
   testResults: JestTestResult[];
-};
+}
 
-export type JestTestRunResult = {
+export interface JestTestRunResult {
   /**
    * True if all the tests are passing.
    *
@@ -233,4 +233,4 @@ export type JestTestRunResult = {
    * @type {boolean}
    */
   wasInterrupted?: boolean;
-};
+}
