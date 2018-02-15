@@ -33,7 +33,7 @@
     "xmlbuilder": "~8.2.2"
   },
   "devDependencies": {
-    "@types/jest": "^16.0.0",
+    "@types/jest": "^22.1.2",
     "@types/node": "^7.0.0",
     "@types/uuid": "^2.0.29",
     "@types/xml2js": "^0.0.32",
@@ -44,7 +44,7 @@
     "semantic-release": "^6.3.2",
     "ts-jest": "^22.0.4",
     "tslint": "~4.4.2",
-    "typescript": "~2.1.5",
+    "typescript": "^2.7.1",
     "xml2js": "^0.4.17"
   },
   "config": {

@@ -11,6 +11,7 @@ describe("trx-generator", (): void => {
       numTotalTestSuites: 1,
       numPassedTestSuites: 0,
       numFailedTestSuites: 1,
+      numPendingTestSuites: 0,
       numRuntimeErrorTestSuites: 0,
       numTotalTests: 2,
       numPassedTests: 1,
@@ -29,18 +30,18 @@ describe("trx-generator", (): void => {
           testFilePath: "C:\\testPath\\test.js",
           testResults: [
             {
-              ancestorTitles: ["foo's", "bar method"];
-              failureMessages: [];
-              numPassingAsserts: 1;
-              status: "passed";
-              title: "works well";
+              ancestorTitles: ["foo's", "bar method"],
+              failureMessages: [],
+              numPassingAsserts: 1,
+              status: "passed",
+              title: "works well",
             },
             {
-              ancestorTitles: ["foo's", "bar method"];
-              failureMessages: ["This did not go as planned"];
-              numPassingAsserts: 1;
-              status: "failed";
-              title: "works not so well";
+              ancestorTitles: ["foo's", "bar method"],
+              failureMessages: ["This did not go as planned"],
+              numPassingAsserts: 1,
+              status: "failed",
+              title: "works not so well",
             }
           ]
         }
@@ -72,6 +73,7 @@ describe("trx-generator", (): void => {
       numTotalTestSuites: 1,
       numPassedTestSuites: 0,
       numFailedTestSuites: 1,
+      numPendingTestSuites: 0,
       numRuntimeErrorTestSuites: 0,
       numTotalTests: 2,
       numPassedTests: 1,
@@ -90,18 +92,18 @@ describe("trx-generator", (): void => {
           testFilePath: "C:\\testPath\\test.js",
           testResults: [
             {
-              ancestorTitles: ["foo's", "bar method"];
-              failureMessages: [];
-              numPassingAsserts: 1;
-              status: "passed";
-              title: "works well";
+              ancestorTitles: ["foo's", "bar method"],
+              failureMessages: [],
+              numPassingAsserts: 1,
+              status: "passed",
+              title: "works well",
             },
             {
-              ancestorTitles: ["foo's", "bar method"];
-              failureMessages: ["This did not go as planned\uDFFF"];
-              numPassingAsserts: 1;
-              status: "failed";
-              title: "works not so well";
+              ancestorTitles: ["foo's", "bar method"],
+              failureMessages: ["This did not go as planned\uDFFF"],
+              numPassingAsserts: 1,
+              status: "failed",
+              title: "works not so well",
             }
           ]
         }
@@ -140,8 +142,6 @@ describe("trx-generator", (): void => {
       "success": true,
       "testResults": [
         {
-          "console": null,
-          "failureMessage": null,
           "numFailingTests": 0,
           "numPassingTests": 0,
           "numPendingTests": 1,

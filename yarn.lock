@@ -49,9 +49,9 @@
     conventional-changelog "0.0.17"
     github-url-from-git "^1.4.0"
 
-"@types/jest@^16.0.0":
-  version "16.0.8"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-16.0.8.tgz#ce661d12bc446e3b823394ddc9b4675f4318139c"
+"@types/jest@^22.1.2":
+  version "22.1.2"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.1.2.tgz#813a79ec98221633845627636dbc606f31220dbc"
 
 "@types/node@*":
   version "6.0.45"
@@ -4173,9 +4173,9 @@ typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@~2.1.5:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.6.tgz#40c7e6e9e5da7961b7718b55505f9cac9487a607"
+typescript@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
 
 uglify-js@^2.6:
   version "2.7.4"
