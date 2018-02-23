@@ -29,22 +29,22 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "uuid": "~3.0.0",
-    "xmlbuilder": "~8.2.2"
+    "uuid": "^3.2.1",
+    "xmlbuilder": "^9.0.7"
   },
   "devDependencies": {
-    "@types/jest": "^22.1.2",
-    "@types/uuid": "^2.0.29",
-    "@types/xml2js": "^0.0.32",
+    "@types/jest": "^22.1.3",
+    "@types/uuid": "^3.4.3",
+    "@types/xml2js": "^0.4.2",
     "@types/xmlbuilder": "^0.0.28",
-    "commitizen": "^2.9.5",
+    "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
-    "jest": "^22.3.0",
+    "jest": "^22.4.2",
     "semantic-release": "^12.4.1",
     "ts-jest": "^22.0.4",
     "tslint": "^5.9.1",
-    "typescript": "^2.7.1",
-    "xml2js": "^0.4.17"
+    "typescript": "^2.7.2",
+    "xml2js": "^0.4.19"
   },
   "config": {
     "commitizen": {
