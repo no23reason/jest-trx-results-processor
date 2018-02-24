@@ -1,4 +1,3 @@
-import * as os from "os";
 import * as uuid from "uuid";
 import {
   create as createXmlBuilder,
@@ -19,6 +18,7 @@ import {
 } from "./types";
 import {
   formatDuration,
+  getEnvInfo,
   getFullTestName,
   getSuitePerTestDuration,
   getTestClassName,
@@ -42,18 +42,18 @@ const renderTestRun = (
     .att("runUser", userName)
     .att("xmlns", "http://microsoft.com/schemas/VisualStudio/TeamTest/2010");
 
-const renderTestSettings = (builder: XMLElementOrXMLNode) =>
-  builder
+const renderTestSettings = (parentNode: XMLElementOrXMLNode) =>
+  parentNode
     .ele("TestSettings")
     .att("name", "Jest test run")
     .att("id", uuid.v4());
 
 const renderTimes = (
-  builder: XMLElementOrXMLNode,
+  parentNode: XMLElementOrXMLNode,
   testRunResult: JestTestRunResult,
 ) => {
   const startTime = new Date(testRunResult.startTime).toISOString();
-  builder
+  parentNode
     .ele("Times")
     .att("creation", startTime)
     .att("queuing", startTime)
@@ -61,12 +61,13 @@ const renderTimes = (
 };
 
 const renderResultSummary = (
-  builder: XMLElementOrXMLNode,
+  parentNode: XMLElementOrXMLNode,
   testRunResult: JestTestRunResult,
 ) => {
-  const summary = builder
+  const summary = parentNode
     .ele("ResultSummary")
     .att("outcome", testRunResult.success ? "Passed" : "Failed");
+
   summary
     .ele("Counters")
     .att("total", testRunResult.numTotalTests)
@@ -79,12 +80,14 @@ const renderResultSummary = (
     .att("error", 0);
 };
 
-const renderTestLists = (builder: XMLElementOrXMLNode) => {
-  const testLists = builder.ele("TestLists");
+const renderTestLists = (parentNode: XMLElementOrXMLNode) => {
+  const testLists = parentNode.ele("TestLists");
+
   testLists
     .ele("TestList")
     .att("name", "Results Not in a List")
     .att("id", testListNotInListId);
+
   testLists
     .ele("TestList")
     .att("name", "All Loaded Results")
@@ -159,13 +162,7 @@ const renderTestSuiteResult = (
 };
 
 export const generateTrx = (testRunResult: JestTestRunResult): string => {
-  const computerName = os.hostname();
-  const userName =
-    process.env.SUDO_USER ||
-    process.env.LOGNAME ||
-    process.env.USER ||
-    process.env.LNAME ||
-    process.env.USERNAME;
+  const { computerName, userName } = getEnvInfo();
 
   const resultBuilder = createXmlBuilder("TestRun", {
     version: "1.0",

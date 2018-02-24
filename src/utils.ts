@@ -1,3 +1,5 @@
+import * as os from "os";
+
 import { JestTestResult, JestTestSuiteResult } from "./types";
 
 // Adapted from https://github.com/hatchteam/karma-trx-reporter
@@ -29,7 +31,7 @@ const sanitizationRegex = /[\u0000-\u0008\u000B-\u000C\u000E-\u001F\uD800-\uDFFF
 export const sanitizeString = (str: string): string =>
   str && str.replace(sanitizationRegex, ""); // removes the characters that make xmlbuilder throw
 
-// Auxilliary functions
+// Auxilliary test data functions
 export const getFullTestName = (testResult: JestTestResult): string =>
   testResult.ancestorTitles && testResult.ancestorTitles.length
     ? `${testResult.ancestorTitles.join(" / ")} / ${testResult.title}`
@@ -51,3 +53,13 @@ export const getSuitePerTestDuration = (
         testSuiteResult.numFailingTests +
         testSuiteResult.numPendingTests),
   );
+
+export const getEnvInfo = () => ({
+  computerName: os.hostname(),
+  userName:
+    process.env.SUDO_USER ||
+    process.env.LOGNAME ||
+    process.env.USER ||
+    process.env.LNAME ||
+    process.env.USERNAME,
+});
