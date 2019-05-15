@@ -77,6 +77,12 @@ export interface JestTestSuiteResult {
    */
   coverage?: {};
   /**
+   * FailureMessage for the overall suite when it fails to run.
+   *
+   * @type {string}
+   */
+  failureMessage?: string;
+  /**
    * Number of failing tests in the suite.
    *
    * @type {number}
