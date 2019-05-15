@@ -247,7 +247,7 @@ const renderTestSuiteResult = (
 
 export const generateTrx = (
   testRunResult: JestTestRunResult,
-  options: IOptions,
+  options?: IOptions,
 ): string => {
   const { computerName, userName } = getEnvInfo();
 
@@ -278,7 +278,7 @@ export const generateTrx = (
       testEntries,
       results,
       computerName,
-      options.postProcessTestResult,
+      options && options.postProcessTestResult,
     ),
   );
 
