@@ -202,7 +202,7 @@ const renderTestSuiteResult = (
     });
   } else if (testSuiteResult.failureMessage) {
     // For suites that failed to run, we will generate a test result that documents the failure.
-    // This occurs when their is a failure compiling/loading the suite, not when a test in the suite fails.
+    // This occurs when there is a failure compiling/loading the suite, not when a test in the suite fails.
     const testId = uuid.v4();
     const executionId = uuid.v4();
     const fullTestName = path.basename(testSuiteResult.testFilePath);
