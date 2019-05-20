@@ -1,7 +1,12 @@
 import "jest";
 import xml2js = require("xml2js");
-import { generateTrx } from "../trx-generator";
-import { JestTestRunResult } from "../types";
+import xmlbuilder = require("xmlbuilder");
+import { generateTrx, IOptions } from "../trx-generator";
+import {
+  JestTestResult,
+  JestTestRunResult,
+  JestTestSuiteResult,
+} from "../types";
 
 describe("trx-generator", (): void => {
   it("processes the results correctly", (done): void => {
@@ -187,5 +192,236 @@ describe("trx-generator", (): void => {
     };
     const result: string = generateTrx(input);
     expect(result).toBeTruthy();
+  });
+
+  it("verify runtime suite failures", done => {
+    const input: JestTestRunResult = {
+      numFailedTestSuites: 0,
+      numFailedTests: 0,
+      numPassedTestSuites: 1,
+      numPassedTests: 1,
+      numPendingTestSuites: 0,
+      numPendingTests: 0,
+      numRuntimeErrorTestSuites: 1,
+      numTotalTestSuites: 2,
+      numTotalTests: 1,
+      snapshot: {
+        added: 0,
+        didUpdate: false,
+        failure: false,
+        filesAdded: 0,
+        filesRemoved: 0,
+        filesUnmatched: 0,
+        filesUpdated: 0,
+        matched: 0,
+        total: 0,
+        unchecked: 0,
+        unmatched: 0,
+        updated: 0,
+      },
+      startTime: 1511376995239,
+      success: false,
+      testResults: [
+        {
+          numFailingTests: 0,
+          numPassingTests: 1,
+          numPendingTests: 0,
+          perfStats: {
+            end: 1511376996104,
+            start: 1511376995923,
+          },
+          snapshot: {
+            added: 0,
+            fileDeleted: false,
+            matched: 0,
+            unchecked: 0,
+            unmatched: 0,
+            updated: 0,
+          },
+          testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
+          testResults: [
+            {
+              ancestorTitles: [],
+              duration: 0,
+              failureMessages: [],
+              fullName: "first",
+              numPassingAsserts: 0,
+              status: "passed",
+              title: "first",
+            },
+          ],
+          sourceMaps: {},
+          skipped: false,
+        },
+        {
+          failureMessage: "Test suite failed with runtime error",
+          numFailingTests: 0,
+          numPassingTests: 0,
+          numPendingTests: 0,
+          perfStats: {
+            end: 1511376996104,
+            start: 1511376995923,
+          },
+          snapshot: {
+            added: 0,
+            fileDeleted: false,
+            matched: 0,
+            unchecked: 0,
+            unmatched: 0,
+            updated: 0,
+          },
+          testFilePath: "C:\\Users\\Github\\test\\test.spec2.js",
+          testResults: [],
+          sourceMaps: {},
+          skipped: false,
+        },
+      ],
+      wasInterrupted: false,
+    };
+
+    const result: string = generateTrx(input);
+
+    // Verify the summary has the proper test counts.
+    xml2js.parseString(result, (err, parsed) => {
+      expect(err).toBeFalsy();
+      expect(parsed).toBeTruthy();
+      expect(parsed.TestRun).toBeTruthy();
+      expect(parsed.TestRun.$).toBeTruthy();
+      expect(parsed.TestRun.$.xmlns).toEqual(
+        "http://microsoft.com/schemas/VisualStudio/TeamTest/2010",
+      );
+      expect(parsed.TestRun.Results).toBeTruthy();
+      expect(parsed.TestRun.Results.length).toEqual(1);
+      expect(parsed.TestRun.Results[0].UnitTestResult.length).toEqual(2);
+      expect(parsed.TestRun.Results[0].UnitTestResult.length).toEqual(2);
+
+      // Verify the summary values.
+      expect(parsed.TestRun.ResultSummary[0].$.outcome).toBe("Failed");
+      expect(parsed.TestRun.ResultSummary[0].Counters[0].$.total).toBe("2");
+      expect(parsed.TestRun.ResultSummary[0].Counters[0].$.executed).toBe("1");
+      expect(parsed.TestRun.ResultSummary[0].Counters[0].$.passed).toBe("1");
+      expect(parsed.TestRun.ResultSummary[0].Counters[0].$.failed).toBe("0");
+      expect(parsed.TestRun.ResultSummary[0].Counters[0].$.error).toBe("1");
+
+      // First test passed
+      expect(parsed.TestRun.Results[0].UnitTestResult[0].$.outcome).toEqual(
+        "Passed",
+      );
+      expect(parsed.TestRun.Results[0].UnitTestResult[0].$.duration).toEqual(
+        "00:00:00.181",
+      );
+
+      // Second test result represents the failed suite.
+      expect(parsed.TestRun.Results[0].UnitTestResult[1].$.outcome).toEqual(
+        "Failed",
+      );
+      expect(parsed.TestRun.Results[0].UnitTestResult[1].$.duration).toEqual(
+        "0",
+      );
+      expect(
+        parsed.TestRun.Results[0].UnitTestResult[1].Output[0].ErrorInfo[0]
+          .Message[0],
+      ).toEqual("Test suite failed with runtime error");
+
+      done();
+    });
+  });
+
+  it("verify postprocess handler", done => {
+    const input: JestTestRunResult = {
+      numFailedTestSuites: 0,
+      numFailedTests: 0,
+      numPassedTestSuites: 1,
+      numPassedTests: 1,
+      numPendingTestSuites: 0,
+      numPendingTests: 0,
+      numRuntimeErrorTestSuites: 0,
+      numTotalTestSuites: 1,
+      numTotalTests: 1,
+      snapshot: {
+        added: 0,
+        didUpdate: false,
+        failure: false,
+        filesAdded: 0,
+        filesRemoved: 0,
+        filesUnmatched: 0,
+        filesUpdated: 0,
+        matched: 0,
+        total: 0,
+        unchecked: 0,
+        unmatched: 0,
+        updated: 0,
+      },
+      startTime: 1511376995239,
+      success: true,
+      testResults: [
+        {
+          numFailingTests: 0,
+          numPassingTests: 1,
+          numPendingTests: 0,
+          perfStats: {
+            end: 1511376996104,
+            start: 1511376995923,
+          },
+          snapshot: {
+            added: 0,
+            fileDeleted: false,
+            matched: 0,
+            unchecked: 0,
+            unmatched: 0,
+            updated: 0,
+          },
+          testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
+          testResults: [
+            {
+              ancestorTitles: [],
+              duration: 0,
+              failureMessages: [],
+              fullName: "first",
+              numPassingAsserts: 0,
+              status: "passed",
+              title: "first",
+            },
+          ],
+          sourceMaps: {},
+          skipped: false,
+        },
+      ],
+      wasInterrupted: false,
+    };
+
+    const addResultFile = (
+      testSuiteResult: JestTestSuiteResult,
+      testResult: JestTestResult,
+      testResultNode: xmlbuilder.XMLElementOrXMLNode,
+    ): void => {
+      testResultNode
+        .ele("ResultFiles")
+        .ele("ResultFile")
+        .att("path", "C:\\Users\\Github\\test\\test.spec.js");
+    };
+
+    const options: IOptions = {
+      outputFile: "",
+      postProcessTestResult: [addResultFile],
+    };
+    const result: string = generateTrx(input, options);
+
+    xml2js.parseString(result, (err, parsed) => {
+      // Verify the file was added to the UnitTestResult.
+      expect(parsed.TestRun.Results[0].UnitTestResult[0].$.outcome).toEqual(
+        "Passed",
+      );
+      expect(
+        parsed.TestRun.Results[0].UnitTestResult[0].ResultFiles[0]
+          .ResultFile[0],
+      ).toBeTruthy();
+      expect(
+        parsed.TestRun.Results[0].UnitTestResult[0].ResultFiles[0].ResultFile[0]
+          .$.path,
+      ).toBe("C:\\Users\\Github\\test\\test.spec.js");
+
+      done();
+    });
   });
 });
