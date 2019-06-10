@@ -175,8 +175,8 @@
     "@types/node" "*"
 
 "@types/xml2js@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.4.2.tgz#a4b84b3879ffd4710953fd92cabfde9a8a4e8456"
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.4.4.tgz#2093d94359a201806d997dccefc80153db311c66"
   dependencies:
     "@types/node" "*"
 
