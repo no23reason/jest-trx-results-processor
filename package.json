@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "uuid": "^3.2.1",
-    "xmlbuilder": "^9.0.7"
+    "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.15",
