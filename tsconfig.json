@@ -5,7 +5,8 @@
         "noImplicitAny": true,
         "sourceMap": false,
         "strictNullChecks": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "lib": ["es2015"]
     },
     "exclude": [
         "src/__tests__/**/*"
