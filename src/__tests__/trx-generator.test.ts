@@ -393,7 +393,7 @@ describe("trx-generator", (): void => {
     const addResultFile = (
       testSuiteResult: JestTestSuiteResult,
       testResult: JestTestResult,
-      testResultNode: xmlbuilder.XMLElementOrXMLNode,
+      testResultNode: xmlbuilder.XMLElement,
     ): void => {
       testResultNode
         .ele("ResultFiles")

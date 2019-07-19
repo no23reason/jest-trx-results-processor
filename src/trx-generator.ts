@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as uuid from "uuid";
-import { create as createXmlBuilder, XMLElementOrXMLNode } from "xmlbuilder";
+import { create as createXmlBuilder, XMLElement } from "xmlbuilder";
 
 import {
   testListAllLoadedResultsId,
@@ -40,13 +40,13 @@ export interface IOptions {
     (
       testSuiteResult: JestTestSuiteResult,
       testResult: JestTestResult,
-      testResultNode: XMLElementOrXMLNode,
+      testResultNode: XMLElement,
     ) => void
   ];
 }
 
 const renderTestRun = (
-  builder: XMLElementOrXMLNode,
+  builder: XMLElement,
   testRunResult: JestTestRunResult,
   computerName: string,
   userName?: string,
@@ -62,14 +62,14 @@ const renderTestRun = (
     .att("runUser", userName)
     .att("xmlns", "http://microsoft.com/schemas/VisualStudio/TeamTest/2010");
 
-const renderTestSettings = (parentNode: XMLElementOrXMLNode) =>
+const renderTestSettings = (parentNode: XMLElement) =>
   parentNode
     .ele("TestSettings")
     .att("name", "Jest test run")
     .att("id", uuid.v4());
 
 const renderTimes = (
-  parentNode: XMLElementOrXMLNode,
+  parentNode: XMLElement,
   testRunResult: JestTestRunResult,
 ) => {
   const startTime = new Date(testRunResult.startTime).toISOString();
@@ -81,7 +81,7 @@ const renderTimes = (
 };
 
 const renderResultSummary = (
-  parentNode: XMLElementOrXMLNode,
+  parentNode: XMLElement,
   testRunResult: JestTestRunResult,
 ) => {
   const summary = parentNode
@@ -103,7 +103,7 @@ const renderResultSummary = (
     .att("error", testRunResult.numRuntimeErrorTestSuites);
 };
 
-const renderTestLists = (parentNode: XMLElementOrXMLNode) => {
+const renderTestLists = (parentNode: XMLElement) => {
   const testLists = parentNode.ele("TestLists");
 
   testLists
@@ -119,15 +119,15 @@ const renderTestLists = (parentNode: XMLElementOrXMLNode) => {
 
 const renderTestSuiteResult = (
   testSuiteResult: JestTestSuiteResult,
-  testDefinitionsNode: XMLElementOrXMLNode,
-  testEntriesNode: XMLElementOrXMLNode,
-  resultsNode: XMLElementOrXMLNode,
+  testDefinitionsNode: XMLElement,
+  testEntriesNode: XMLElement,
+  resultsNode: XMLElement,
   computerName: string,
   postProcessTestResult?: [
     (
       testSuiteResult: JestTestSuiteResult,
       testResult: JestTestResult,
-      testResultNode: XMLElementOrXMLNode,
+      testResultNode: XMLElement,
     ) => void
   ],
 ) => {
