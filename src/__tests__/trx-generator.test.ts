@@ -52,7 +52,7 @@ describe("trx-generator", (): void => {
         },
       ],
     };
-    const result: string = generateTrx(input);
+    const result = generateTrx(input);
     xml2js.parseString(result, (err, parsed) => {
       expect(err).toBeFalsy();
       expect(parsed).toBeTruthy();
@@ -124,7 +124,7 @@ describe("trx-generator", (): void => {
         },
       ],
     };
-    const result: string = generateTrx(input);
+    const result = generateTrx(input);
     expect(result).toBeTruthy();
   });
 
@@ -190,7 +190,7 @@ describe("trx-generator", (): void => {
       ],
       wasInterrupted: false,
     };
-    const result: string = generateTrx(input);
+    const result = generateTrx(input);
     expect(result).toBeTruthy();
   });
 
@@ -279,7 +279,7 @@ describe("trx-generator", (): void => {
       wasInterrupted: false,
     };
 
-    const result: string = generateTrx(input);
+    const result = generateTrx(input);
 
     // Verify the summary has the proper test counts.
     xml2js.parseString(result, (err, parsed) => {
@@ -405,7 +405,7 @@ describe("trx-generator", (): void => {
       outputFile: "",
       postProcessTestResult: [addResultFile],
     };
-    const result: string = generateTrx(input, options);
+    const result = generateTrx(input, options);
 
     xml2js.parseString(result, (err, parsed) => {
       // Verify the file was added to the UnitTestResult.

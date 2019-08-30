@@ -33,6 +33,12 @@ export interface IOptions {
   outputFile: string;
 
   /**
+   * The username to use if the real username cannot be detected.
+   * @default "anonymous"
+   */
+  defaultUserName?: string;
+
+  /**
    * Set of methods that may be used to augment the resulting trx file.
    * Each of these methods are called after the testResultNode has been generated.
    */
@@ -41,7 +47,7 @@ export interface IOptions {
       testSuiteResult: JestTestSuiteResult,
       testResult: JestTestResult,
       testResultNode: XMLElement,
-    ) => void
+    ) => void,
   ];
 }
 
@@ -128,7 +134,7 @@ const renderTestSuiteResult = (
       testSuiteResult: JestTestSuiteResult,
       testResult: JestTestResult,
       testResultNode: XMLElement,
-    ) => void
+    ) => void,
   ],
 ) => {
   const perTestDuration = getSuitePerTestDuration(testSuiteResult);
@@ -249,7 +255,9 @@ export const generateTrx = (
   testRunResult: JestTestRunResult,
   options?: IOptions,
 ): string => {
-  const { computerName, userName } = getEnvInfo();
+  const { computerName, userName } = getEnvInfo(
+    options && options.defaultUserName,
+  );
 
   const resultBuilder = createXmlBuilder("TestRun", {
     version: "1.0",
