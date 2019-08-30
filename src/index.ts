@@ -5,6 +5,7 @@ import { JestTestRunResult } from "./types";
 const processor = (
   options: IOptions = {
     outputFile: "test-results.trx",
+    defaultUserName: "anonymous",
   },
 ) => (testRunResult: JestTestRunResult): JestTestRunResult => {
   process.stdout.write("Generating TRX file...");
