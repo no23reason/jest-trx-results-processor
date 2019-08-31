@@ -1,13 +1,13 @@
+import { AggregatedResult } from "@jest/test-result";
 import { writeFileSync } from "fs";
 import { generateTrx, IOptions } from "./trx-generator";
-import { JestTestRunResult } from "./types";
 
 const processor = (
   options: IOptions = {
     outputFile: "test-results.trx",
     defaultUserName: "anonymous",
   },
-) => (testRunResult: JestTestRunResult): JestTestRunResult => {
+) => (testRunResult: AggregatedResult): AggregatedResult => {
   process.stdout.write("Generating TRX file...");
 
   const trx = generateTrx(testRunResult, options);
