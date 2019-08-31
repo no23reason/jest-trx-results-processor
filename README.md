@@ -10,7 +10,7 @@ This package is used to export a TRX file from [Jest](https://facebook.github.io
 
 ## Migration from 0.x
 
-Version 1.0.0 was rewritten to use reporters API. Either use that (see [Usage](#usage)), or update the require path in your configuration (see [Usage as testResultsProcessor](#usage-as-test-results-processor)).
+Version 1.0.0 was rewritten to use reporters API. Either use that (see [Usage](#usage)), or update the require path in your configuration (see [Usage as testResultsProcessor](#usage-as-testresultsprocessor)).
 
 ## Installation
 
@@ -49,7 +49,7 @@ Then run jest as usual.
 
 ## Usage as testResultsProcessor
 
-_Notice: this method of use will be removed in the next major version. PLease use the reporters API described above._
+_Notice: this method of use will be removed in the next major version. Please use the reporters API described above._
 
 Create a `jestTrxProcessor.js` file somewhere in your project (for this example I'll assume the `scripts` folder).
 There you can configure the processor, as Jest does not allow you to pass custom parameters to the results processor:
