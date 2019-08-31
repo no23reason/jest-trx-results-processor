@@ -90,9 +90,17 @@ const renderResultSummary = (
   parentNode: XMLElement,
   testRunResult: AggregatedResult,
 ) => {
+  // workaround for https://github.com/facebook/jest/issues/6924
+  const anyTestFailures = !(
+    testRunResult.numFailedTests === 0 &&
+    testRunResult.numRuntimeErrorTestSuites === 0
+  );
+
+  const isSuccess = !(anyTestFailures || testRunResult.snapshot.failure);
+
   const summary = parentNode
     .ele("ResultSummary")
-    .att("outcome", testRunResult.success ? "Passed" : "Failed");
+    .att("outcome", isSuccess ? "Passed" : "Failed");
 
   summary
     .ele("Counters")

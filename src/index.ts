@@ -1,23 +1,27 @@
 import { AggregatedResult } from "@jest/test-result";
+import { Config } from "@jest/types";
 import { writeFileSync } from "fs";
 import { generateTrx, IOptions } from "./trx-generator";
 
-const processor = (
-  options: IOptions = {
-    outputFile: "test-results.trx",
-    defaultUserName: "anonymous",
-  },
-) => (testRunResult: AggregatedResult): AggregatedResult => {
-  process.stdout.write("Generating TRX file...");
+class TrxReporter {
+  constructor(
+    _: Config.GlobalConfig,
+    private options: IOptions = {
+      outputFile: "test-results.trx",
+      defaultUserName: "anonymous",
+    },
+  ) {}
 
-  const trx = generateTrx(testRunResult, options);
+  public onRunComplete = (
+    _: any,
+    aggregatedResults: AggregatedResult,
+  ): Promise<void> | void => {
+    const trx = generateTrx(aggregatedResults, this.options);
 
-  writeFileSync(options.outputFile, trx, { encoding: "utf8" });
-  process.stdout.write("DONE\n");
-  process.stdout.write(`TRX file output to '${options.outputFile}'\n`);
+    writeFileSync(this.options.outputFile, trx, { encoding: "utf8" });
+    process.stdout.write("DONE\n");
+    process.stdout.write(`TRX file output to '${this.options.outputFile}'\n`);
+  }
+}
 
-  // Return the input testRunResult to allow for chaining other result processors
-  return testRunResult;
-};
-
-export = processor;
+module.exports = TrxReporter;
