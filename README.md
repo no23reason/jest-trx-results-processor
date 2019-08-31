@@ -8,24 +8,56 @@
 
 This package is used to export a TRX file from [Jest](https://facebook.github.io/jest/) test runs to be used in [Visual Studio](https://www.visualstudio.com/) and [Visual Studio Team Services](https://www.visualstudio.com/vsts-test/).
 
-## Usage
+## Migration from 0.x
 
-First install the package to your project from npm as a `devDependency`:
+Version 1.0.0 was rewritten to use reporters API. Either use that (see [Usage](#usage)), or update the require path in your configuration (see [Usage as testResultsProcessor](#usage-as-test-results-processor)).
 
-```
-npm install jest-trx-results-processor --save-dev
-```
-
-or if you prefer [`yarn`](https://yarnpkg.com/):
+## Installation
 
 ```
 yarn add --dev jest-trx-results-processor
 ```
 
-Then create a `jestTrxProcessor.js` file somewhere in your project (for this example I'll assume the `scripts` folder).
+## Usage
+
+In your jest config add the following entry:
+
+```json
+{
+  "reporters": ["default", "jest-trx-results-processor"]
+}
+```
+
+You can also pass additional arguments:
+
+```json
+{
+  "reporters": [
+    "default",
+    [
+      "jest-trx-results-processor",
+      {
+        "outputFile": "relative/path/to/resulting.trx", // defaults to "test-results.trx"
+        "defaultUserName": "user name to use if automatic detection fails" // defaults to "anonymous"
+      }
+    ]
+  ]
+}
+```
+
+Then run jest as usual.
+
+## Usage as testResultsProcessor
+
+_Notice: this method of use will be removed in the next major version. PLease use the reporters API described above._
+
+Create a `jestTrxProcessor.js` file somewhere in your project (for this example I'll assume the `scripts` folder).
 There you can configure the processor, as Jest does not allow you to pass custom parameters to the results processor:
 
 ```js
+// for jest-trx-results-processor >= 1.0.0
+var builder = require("jest-trx-results-processor/dist/testResultsProcessor"); // only this has changed since v 0.x
+// for jest-trx-results-processor < 1.0.0
 var builder = require("jest-trx-results-processor");
 
 var processor = builder({
@@ -36,7 +68,7 @@ var processor = builder({
 module.exports = processor;
 ```
 
-Finally point Jest to your results processor in the `package.json`:
+Finally, point Jest to your results processor in the `package.json`:
 
 ```json
 {
@@ -56,7 +88,7 @@ Minimal working configuration can be seen in the [examples folder](https://githu
 
 ## Acknowledgements
 
-This tool is heavily inspired by [karma-trx-reporter](https://github.com/hatchteam/karma-trx-reporter).
+This tool is heavily inspired by [karma-trx-reporter](https://github.com/hatchteam/karma-trx-reporter) and [jest-junit](https://github.com/jest-community/jest-junit).
 
 ## License
 

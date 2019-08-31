@@ -1,6 +1,5 @@
+import { AssertionResult, TestResult } from "@jest/test-result";
 import * as os from "os";
-
-import { JestTestResult, JestTestSuiteResult } from "./types";
 
 // Adapted from https://github.com/hatchteam/karma-trx-reporter
 export const formatDuration = (duration: number): string => {
@@ -32,19 +31,17 @@ export const sanitizeString = (str: string): string =>
   str && str.replace(sanitizationRegex, ""); // removes the characters that make xmlbuilder throw
 
 // Auxillary test data functions
-export const getFullTestName = (testResult: JestTestResult): string =>
+export const getFullTestName = (testResult: AssertionResult): string =>
   testResult.ancestorTitles && testResult.ancestorTitles.length
     ? `${testResult.ancestorTitles.join(" / ")} / ${testResult.title}`
     : testResult.title;
 
-export const getTestClassName = (testResult: JestTestResult): string =>
+export const getTestClassName = (testResult: AssertionResult): string =>
   testResult.ancestorTitles && testResult.ancestorTitles.length
     ? testResult.ancestorTitles[0]
     : "No suite";
 
-export const getSuitePerTestDuration = (
-  testSuiteResult: JestTestSuiteResult,
-): number =>
+export const getSuitePerTestDuration = (testSuiteResult: TestResult): number =>
   // take the total duration of suite and divide it by the number of tests
   // (Jest does not provide per test performance info)
   Math.floor(

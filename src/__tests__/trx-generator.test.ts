@@ -1,16 +1,44 @@
+import {
+  AggregatedResult,
+  AssertionResult,
+  SnapshotSummary,
+  TestResult,
+} from "@jest/test-result";
 import "jest";
 import xml2js = require("xml2js");
 import xmlbuilder = require("xmlbuilder");
 import { generateTrx, IOptions } from "../trx-generator";
-import {
-  JestTestResult,
-  JestTestRunResult,
-  JestTestSuiteResult,
-} from "../types";
 
 describe("trx-generator", (): void => {
+  const emptySnapshotSummary: SnapshotSummary = {
+    added: 0,
+    didUpdate: false,
+    failure: false,
+    filesAdded: 0,
+    filesRemoved: 0,
+    filesRemovedList: [],
+    filesUnmatched: 0,
+    filesUpdated: 0,
+    matched: 0,
+    total: 0,
+    unchecked: 0,
+    uncheckedKeysByFile: [],
+    unmatched: 0,
+    updated: 0,
+  };
+
+  const emptySnapshot: TestResult["snapshot"] = {
+    added: 0,
+    fileDeleted: false,
+    matched: 0,
+    unchecked: 0,
+    uncheckedKeys: [],
+    unmatched: 0,
+    updated: 0,
+  };
+
   it("processes the results correctly", (done): void => {
-    const input: JestTestRunResult = {
+    const input: AggregatedResult = {
       success: true,
       startTime: 1478771929,
       numTotalTestSuites: 1,
@@ -22,16 +50,24 @@ describe("trx-generator", (): void => {
       numPassedTests: 1,
       numFailedTests: 1,
       numPendingTests: 0,
+      numTodoTests: 0,
+      openHandles: [],
+      snapshot: emptySnapshotSummary,
       testResults: [
         {
           coverage: {},
+          leaks: false,
           numFailingTests: 1,
           numPassingTests: 1,
           numPendingTests: 0,
+          numTodoTests: 0,
+          openHandles: [],
           perfStats: {
             start: 1478771929,
             end: 1478778929,
           },
+          skipped: false,
+          snapshot: emptySnapshot,
           testFilePath: "C:\\testPath\\test.js",
           testResults: [
             {
@@ -40,6 +76,11 @@ describe("trx-generator", (): void => {
               numPassingAsserts: 1,
               status: "passed",
               title: "works well",
+              fullName: "foo's > bar method > works well",
+              location: {
+                column: 0,
+                line: 0,
+              },
             },
             {
               ancestorTitles: ["foo's", "bar method"],
@@ -47,10 +88,16 @@ describe("trx-generator", (): void => {
               numPassingAsserts: 1,
               status: "failed",
               title: "works not so well",
+              fullName: "foo's > bar method > works not so well",
+              location: {
+                column: 0,
+                line: 0,
+              },
             },
           ],
         },
       ],
+      wasInterrupted: false,
     };
     const result = generateTrx(input);
     xml2js.parseString(result, (err, parsed) => {
@@ -82,7 +129,7 @@ describe("trx-generator", (): void => {
   });
 
   it("handles error message with invalid XML chars correctly", (): void => {
-    const input: JestTestRunResult = {
+    const input: AggregatedResult = {
       success: true,
       startTime: 1478771929,
       numTotalTestSuites: 1,
@@ -94,12 +141,20 @@ describe("trx-generator", (): void => {
       numPassedTests: 1,
       numFailedTests: 1,
       numPendingTests: 0,
+      numTodoTests: 0,
+      openHandles: [],
+      snapshot: emptySnapshotSummary,
       testResults: [
         {
           coverage: {},
+          leaks: false,
           numFailingTests: 1,
           numPassingTests: 1,
           numPendingTests: 0,
+          numTodoTests: 0,
+          openHandles: [],
+          skipped: false,
+          snapshot: emptySnapshot,
           perfStats: {
             start: 1478771929,
             end: 1478778929,
@@ -112,6 +167,11 @@ describe("trx-generator", (): void => {
               numPassingAsserts: 1,
               status: "passed",
               title: "works well",
+              fullName: "foo's > bar method > works well",
+              location: {
+                column: 0,
+                line: 0,
+              },
             },
             {
               ancestorTitles: ["foo's", "bar method"],
@@ -119,17 +179,23 @@ describe("trx-generator", (): void => {
               numPassingAsserts: 1,
               status: "failed",
               title: "works not so well",
+              fullName: "foo's > bar method > works not so well",
+              location: {
+                column: 0,
+                line: 0,
+              },
             },
           ],
         },
       ],
+      wasInterrupted: false,
     };
     const result = generateTrx(input);
     expect(result).toBeTruthy();
   });
 
   it("handles skipped test suites", (): void => {
-    const input: JestTestRunResult = {
+    const input: AggregatedResult = {
       numFailedTestSuites: 0,
       numFailedTests: 0,
       numPassedTestSuites: 0,
@@ -137,41 +203,26 @@ describe("trx-generator", (): void => {
       numPendingTestSuites: 1,
       numPendingTests: 1,
       numRuntimeErrorTestSuites: 0,
+      numTodoTests: 0,
       numTotalTestSuites: 1,
       numTotalTests: 1,
-      snapshot: {
-        added: 0,
-        didUpdate: false,
-        failure: false,
-        filesAdded: 0,
-        filesRemoved: 0,
-        filesUnmatched: 0,
-        filesUpdated: 0,
-        matched: 0,
-        total: 0,
-        unchecked: 0,
-        unmatched: 0,
-        updated: 0,
-      },
+      openHandles: [],
+      snapshot: emptySnapshotSummary,
       startTime: 1511376995239,
       success: true,
       testResults: [
         {
+          leaks: false,
           numFailingTests: 0,
           numPassingTests: 0,
           numPendingTests: 1,
+          numTodoTests: 0,
+          openHandles: [],
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
           },
-          snapshot: {
-            added: 0,
-            fileDeleted: false,
-            matched: 0,
-            unchecked: 0,
-            unmatched: 0,
-            updated: 0,
-          },
+          snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
           testResults: [
             {
@@ -182,6 +233,10 @@ describe("trx-generator", (): void => {
               numPassingAsserts: 0,
               status: "pending",
               title: "first",
+              location: {
+                column: 0,
+                line: 0,
+              },
             },
           ],
           sourceMaps: {},
@@ -195,7 +250,7 @@ describe("trx-generator", (): void => {
   });
 
   it("verify runtime suite failures", done => {
-    const input: JestTestRunResult = {
+    const input: AggregatedResult = {
       numFailedTestSuites: 0,
       numFailedTests: 0,
       numPassedTestSuites: 1,
@@ -203,41 +258,26 @@ describe("trx-generator", (): void => {
       numPendingTestSuites: 0,
       numPendingTests: 0,
       numRuntimeErrorTestSuites: 1,
+      numTodoTests: 0,
       numTotalTestSuites: 2,
       numTotalTests: 1,
-      snapshot: {
-        added: 0,
-        didUpdate: false,
-        failure: false,
-        filesAdded: 0,
-        filesRemoved: 0,
-        filesUnmatched: 0,
-        filesUpdated: 0,
-        matched: 0,
-        total: 0,
-        unchecked: 0,
-        unmatched: 0,
-        updated: 0,
-      },
+      openHandles: [],
+      snapshot: emptySnapshotSummary,
       startTime: 1511376995239,
       success: false,
       testResults: [
         {
+          leaks: false,
           numFailingTests: 0,
           numPassingTests: 1,
           numPendingTests: 0,
+          numTodoTests: 0,
+          openHandles: [],
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
           },
-          snapshot: {
-            added: 0,
-            fileDeleted: false,
-            matched: 0,
-            unchecked: 0,
-            unmatched: 0,
-            updated: 0,
-          },
+          snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
           testResults: [
             {
@@ -248,6 +288,10 @@ describe("trx-generator", (): void => {
               numPassingAsserts: 0,
               status: "passed",
               title: "first",
+              location: {
+                column: 0,
+                line: 0,
+              },
             },
           ],
           sourceMaps: {},
@@ -255,21 +299,17 @@ describe("trx-generator", (): void => {
         },
         {
           failureMessage: "Test suite failed with runtime error",
+          leaks: false,
           numFailingTests: 0,
           numPassingTests: 0,
           numPendingTests: 0,
+          numTodoTests: 0,
+          openHandles: [],
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
           },
-          snapshot: {
-            added: 0,
-            fileDeleted: false,
-            matched: 0,
-            unchecked: 0,
-            unmatched: 0,
-            updated: 0,
-          },
+          snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec2.js",
           testResults: [],
           sourceMaps: {},
@@ -328,7 +368,7 @@ describe("trx-generator", (): void => {
   });
 
   it("verify postprocess handler", done => {
-    const input: JestTestRunResult = {
+    const input: AggregatedResult = {
       numFailedTestSuites: 0,
       numFailedTests: 0,
       numPassedTestSuites: 1,
@@ -336,41 +376,26 @@ describe("trx-generator", (): void => {
       numPendingTestSuites: 0,
       numPendingTests: 0,
       numRuntimeErrorTestSuites: 0,
+      numTodoTests: 0,
       numTotalTestSuites: 1,
       numTotalTests: 1,
-      snapshot: {
-        added: 0,
-        didUpdate: false,
-        failure: false,
-        filesAdded: 0,
-        filesRemoved: 0,
-        filesUnmatched: 0,
-        filesUpdated: 0,
-        matched: 0,
-        total: 0,
-        unchecked: 0,
-        unmatched: 0,
-        updated: 0,
-      },
+      openHandles: [],
+      snapshot: emptySnapshotSummary,
       startTime: 1511376995239,
       success: true,
       testResults: [
         {
+          leaks: false,
           numFailingTests: 0,
           numPassingTests: 1,
           numPendingTests: 0,
+          numTodoTests: 0,
+          openHandles: [],
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
           },
-          snapshot: {
-            added: 0,
-            fileDeleted: false,
-            matched: 0,
-            unchecked: 0,
-            unmatched: 0,
-            updated: 0,
-          },
+          snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
           testResults: [
             {
@@ -381,6 +406,10 @@ describe("trx-generator", (): void => {
               numPassingAsserts: 0,
               status: "passed",
               title: "first",
+              location: {
+                column: 0,
+                line: 0,
+              },
             },
           ],
           sourceMaps: {},
@@ -391,8 +420,8 @@ describe("trx-generator", (): void => {
     };
 
     const addResultFile = (
-      testSuiteResult: JestTestSuiteResult,
-      testResult: JestTestResult,
+      testSuiteResult: TestResult,
+      testResult: AssertionResult,
       testResultNode: xmlbuilder.XMLElement,
     ): void => {
       testResultNode

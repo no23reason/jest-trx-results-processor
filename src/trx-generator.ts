@@ -1,3 +1,8 @@
+import {
+  AggregatedResult,
+  AssertionResult,
+  TestResult,
+} from "@jest/test-result";
 import * as path from "path";
 import * as uuid from "uuid";
 import { create as createXmlBuilder, XMLElement } from "xmlbuilder";
@@ -8,11 +13,6 @@ import {
   testOutcomeTable,
   testType,
 } from "./constants";
-import {
-  JestTestResult,
-  JestTestRunResult,
-  JestTestSuiteResult,
-} from "./types";
 import {
   formatDuration,
   getEnvInfo,
@@ -44,8 +44,8 @@ export interface IOptions {
    */
   postProcessTestResult?: [
     (
-      testSuiteResult: JestTestSuiteResult,
-      testResult: JestTestResult,
+      testSuiteResult: TestResult,
+      testResult: AssertionResult,
       testResultNode: XMLElement,
     ) => void,
   ];
@@ -53,7 +53,7 @@ export interface IOptions {
 
 const renderTestRun = (
   builder: XMLElement,
-  testRunResult: JestTestRunResult,
+  testRunResult: AggregatedResult,
   computerName: string,
   userName?: string,
 ) =>
@@ -76,7 +76,7 @@ const renderTestSettings = (parentNode: XMLElement) =>
 
 const renderTimes = (
   parentNode: XMLElement,
-  testRunResult: JestTestRunResult,
+  testRunResult: AggregatedResult,
 ) => {
   const startTime = new Date(testRunResult.startTime).toISOString();
   parentNode
@@ -88,11 +88,19 @@ const renderTimes = (
 
 const renderResultSummary = (
   parentNode: XMLElement,
-  testRunResult: JestTestRunResult,
+  testRunResult: AggregatedResult,
 ) => {
+  // workaround for https://github.com/facebook/jest/issues/6924
+  const anyTestFailures = !(
+    testRunResult.numFailedTests === 0 &&
+    testRunResult.numRuntimeErrorTestSuites === 0
+  );
+
+  const isSuccess = !(anyTestFailures || testRunResult.snapshot.failure);
+
   const summary = parentNode
     .ele("ResultSummary")
-    .att("outcome", testRunResult.success ? "Passed" : "Failed");
+    .att("outcome", isSuccess ? "Passed" : "Failed");
 
   summary
     .ele("Counters")
@@ -124,15 +132,15 @@ const renderTestLists = (parentNode: XMLElement) => {
 };
 
 const renderTestSuiteResult = (
-  testSuiteResult: JestTestSuiteResult,
+  testSuiteResult: TestResult,
   testDefinitionsNode: XMLElement,
   testEntriesNode: XMLElement,
   resultsNode: XMLElement,
   computerName: string,
   postProcessTestResult?: [
     (
-      testSuiteResult: JestTestSuiteResult,
-      testResult: JestTestResult,
+      testSuiteResult: TestResult,
+      testResult: AssertionResult,
       testResultNode: XMLElement,
     ) => void,
   ],
@@ -252,7 +260,7 @@ const renderTestSuiteResult = (
 };
 
 export const generateTrx = (
-  testRunResult: JestTestRunResult,
+  testRunResult: AggregatedResult,
   options?: IOptions,
 ): string => {
   const { computerName, userName } = getEnvInfo(
