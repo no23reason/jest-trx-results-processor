@@ -1,5 +1,8 @@
 import { AggregatedResult } from "@jest/test-result";
 import { writeFileSync } from "fs";
+import mkdirp from "mkdirp";
+import path from "path";
+
 import { generateTrx, IOptions } from "./trx-generator";
 
 const processor = (
@@ -11,6 +14,9 @@ const processor = (
   process.stdout.write("Generating TRX file...");
 
   const trx = generateTrx(testRunResult, options);
+
+  const targetDir = path.dirname(path.resolve(options.outputFile));
+  mkdirp.sync(targetDir);
 
   writeFileSync(options.outputFile, trx, { encoding: "utf8" });
   process.stdout.write("DONE\n");
