@@ -35,11 +35,13 @@
   "devDependencies": {
     "@jest/test-result": "^24.9.0",
     "@types/jest": "^24.0.18",
+    "@types/mkdirp": "^0.5.2",
     "@types/uuid": "^3.4.3",
     "@types/xml2js": "^0.4.2",
     "commitizen": "^3.1.1",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^24.8.0",
+    "mkdirp": "^0.5.1",
     "semantic-release": "^15.13.12",
     "ts-jest": "^24.0.2",
     "tslint": "^5.9.1",
