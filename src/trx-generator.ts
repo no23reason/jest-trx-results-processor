@@ -83,7 +83,8 @@ const renderTimes = (
     .ele("Times")
     .att("creation", startTime)
     .att("queuing", startTime)
-    .att("start", startTime);
+    .att("start", startTime)
+    .att("finish", startTime);
 };
 
 const renderResultSummary = (
