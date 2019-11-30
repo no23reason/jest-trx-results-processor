@@ -3,12 +3,13 @@ import { writeFileSync } from "fs";
 import mkdirp from "mkdirp";
 import path from "path";
 
+import { defaultOutputFile, defaultUserName } from "./constants";
 import { generateTrx, IOptions } from "./trx-generator";
 
 const processor = (
   options: IOptions = {
-    outputFile: "test-results.trx",
-    defaultUserName: "anonymous",
+    outputFile: defaultOutputFile,
+    defaultUserName,
   },
 ) => (testRunResult: AggregatedResult): AggregatedResult => {
   process.stdout.write("Generating TRX file...");

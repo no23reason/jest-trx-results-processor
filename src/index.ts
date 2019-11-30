@@ -4,16 +4,19 @@ import { writeFileSync } from "fs";
 import mkdirp from "mkdirp";
 import path from "path";
 
+import { defaultOutputFile, defaultUserName } from "./constants";
 import { generateTrx, IOptions } from "./trx-generator";
 
 class TrxReporter {
-  constructor(
-    _: Config.GlobalConfig,
-    private options: IOptions = {
-      outputFile: "test-results.trx",
-      defaultUserName: "anonymous",
-    },
-  ) {}
+  private options: IOptions;
+
+  constructor(_: Config.GlobalConfig, options: IOptions) {
+    this.options = {
+      ...options,
+      defaultUserName: options?.defaultUserName ?? defaultUserName,
+      outputFile: options?.outputFile ?? defaultOutputFile,
+    };
+  }
 
   public onRunComplete = (
     _: any,
