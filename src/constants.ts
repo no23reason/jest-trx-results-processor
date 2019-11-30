@@ -8,3 +8,6 @@ export const testOutcomeTable: { [outcome: string]: string } = {
   passed: "Passed",
   pending: "NotExecuted",
 };
+
+export const defaultOutputFile = "test-results.trx";
+export const defaultUserName = "anonymous";
