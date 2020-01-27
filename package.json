@@ -33,7 +33,7 @@
     "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
-    "@jest/test-result": "^24.9.0",
+    "@jest/test-result": "^25.1.0",
     "@types/jest": "^24.0.18",
     "@types/mkdirp": "^0.5.2",
     "@types/uuid": "^3.4.3",
