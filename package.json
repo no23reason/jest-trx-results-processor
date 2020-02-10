@@ -38,7 +38,7 @@
     "@types/mkdirp": "^0.5.2",
     "@types/uuid": "^3.4.3",
     "@types/xml2js": "^0.4.2",
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^25.1.0",
     "mkdirp": "^0.5.1",
