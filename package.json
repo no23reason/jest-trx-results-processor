@@ -41,7 +41,7 @@
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^25.1.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.3",
     "semantic-release": "^17.0.4",
     "ts-jest": "^25.2.1",
     "tslint": "^5.9.1",
