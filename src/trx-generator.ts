@@ -56,7 +56,7 @@ const renderTestRun = (
   testRunResult: AggregatedResult,
   computerName: string,
   userName?: string,
-) =>
+): void => {
   builder
     .att("id", uuid.v4())
     .att(
@@ -67,17 +67,19 @@ const renderTestRun = (
     )
     .att("runUser", userName)
     .att("xmlns", "http://microsoft.com/schemas/VisualStudio/TeamTest/2010");
+};
 
-const renderTestSettings = (parentNode: XMLElement) =>
+const renderTestSettings = (parentNode: XMLElement): void => {
   parentNode
     .ele("TestSettings")
     .att("name", "Jest test run")
     .att("id", uuid.v4());
+};
 
 const renderTimes = (
   parentNode: XMLElement,
   testRunResult: AggregatedResult,
-) => {
+): void => {
   const startTime = new Date(testRunResult.startTime).toISOString();
   parentNode
     .ele("Times")
@@ -90,7 +92,7 @@ const renderTimes = (
 const renderResultSummary = (
   parentNode: XMLElement,
   testRunResult: AggregatedResult,
-) => {
+): void => {
   // workaround for https://github.com/facebook/jest/issues/6924
   const anyTestFailures = !(
     testRunResult.numFailedTests === 0 &&
@@ -118,7 +120,7 @@ const renderResultSummary = (
     .att("error", testRunResult.numRuntimeErrorTestSuites);
 };
 
-const renderTestLists = (parentNode: XMLElement) => {
+const renderTestLists = (parentNode: XMLElement): void => {
   const testLists = parentNode.ele("TestLists");
 
   testLists
@@ -145,7 +147,7 @@ const renderTestSuiteResult = (
       testResultNode: XMLElement,
     ) => void,
   ],
-) => {
+): void => {
   const perTestDuration = getSuitePerTestDuration(testSuiteResult);
   const perTestDurationFormatted = formatDuration(perTestDuration);
 
