@@ -4,7 +4,7 @@ import {
   TestResult,
 } from "@jest/test-result";
 import * as path from "path";
-import * as uuid from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import { create as createXmlBuilder, XMLElement } from "xmlbuilder";
 
 import {
@@ -58,7 +58,7 @@ const renderTestRun = (
   userName?: string,
 ): void => {
   builder
-    .att("id", uuid.v4())
+    .att("id", uuidv4())
     .att(
       "name",
       `${userName}@${computerName} ${new Date(
@@ -73,7 +73,7 @@ const renderTestSettings = (parentNode: XMLElement): void => {
   parentNode
     .ele("TestSettings")
     .att("name", "Jest test run")
-    .att("id", uuid.v4());
+    .att("id", uuidv4());
 };
 
 const renderTimes = (
@@ -153,8 +153,8 @@ const renderTestSuiteResult = (
 
   if (testSuiteResult.testResults && testSuiteResult.testResults.length) {
     testSuiteResult.testResults.forEach((testResult, index) => {
-      const testId = uuid.v4();
-      const executionId = uuid.v4();
+      const testId = uuidv4();
+      const executionId = uuidv4();
       const fullTestName = getFullTestName(testResult);
 
       // UnitTest
@@ -220,8 +220,8 @@ const renderTestSuiteResult = (
   } else if (testSuiteResult.failureMessage) {
     // For suites that failed to run, we will generate a test result that documents the failure.
     // This occurs when there is a failure compiling/loading the suite, not when a test in the suite fails.
-    const testId = uuid.v4();
-    const executionId = uuid.v4();
+    const testId = uuidv4();
+    const executionId = uuidv4();
     const fullTestName = path.basename(testSuiteResult.testFilePath);
     const time = new Date().toISOString();
 
