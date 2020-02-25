@@ -51,7 +51,9 @@ export const getSuitePerTestDuration = (testSuiteResult: TestResult): number =>
         testSuiteResult.numPendingTests),
   );
 
-export const getEnvInfo = (defaultUserName = "anonymous") => ({
+export const getEnvInfo = (
+  defaultUserName = "anonymous",
+): { computerName: string; userName: string } => ({
   computerName: os.hostname(),
   userName:
     process.env.SUDO_USER ||

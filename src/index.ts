@@ -10,7 +10,7 @@ import { generateTrx, IOptions } from "./trx-generator";
 class TrxReporter {
   private options: IOptions;
 
-  constructor(_: Config.GlobalConfig, options: IOptions) {
+  public constructor(_: Config.GlobalConfig, options: IOptions) {
     this.options = {
       ...options,
       defaultUserName: options?.defaultUserName ?? defaultUserName,
@@ -30,7 +30,7 @@ class TrxReporter {
     writeFileSync(this.options.outputFile, trx, { encoding: "utf8" });
     process.stdout.write("DONE\n");
     process.stdout.write(`TRX file output to '${this.options.outputFile}'\n`);
-  }
+  };
 }
 
 module.exports = TrxReporter;
