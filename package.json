@@ -29,14 +29,14 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "uuid": "^3.2.1",
+    "uuid": "^7.0.0",
     "xmlbuilder": "^14.0.0"
   },
   "devDependencies": {
     "@jest/test-result": "^25.1.0",
     "@types/jest": "^25.1.1",
     "@types/mkdirp": "^1.0.0",
-    "@types/uuid": "^3.4.3",
+    "@types/uuid": "^3.4.7",
     "@types/xml2js": "^0.4.2",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
