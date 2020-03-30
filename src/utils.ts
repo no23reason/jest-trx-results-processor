@@ -26,10 +26,6 @@ export const formatDuration = (duration: number): string => {
   );
 };
 
-const sanitizationRegex = /[\u0000-\u0008\u000B-\u000C\u000E-\u001F\uD800-\uDFFF\uFFFE-\uFFFF]/g;
-export const sanitizeString = (str: string): string =>
-  str && str.replace(sanitizationRegex, ""); // removes the characters that make xmlbuilder throw
-
 // Auxillary test data functions
 export const getFullTestName = (testResult: AssertionResult): string =>
   testResult.ancestorTitles && testResult.ancestorTitles.length

@@ -19,7 +19,6 @@ import {
   getFullTestName,
   getSuitePerTestDuration,
   getTestClassName,
-  sanitizeString,
 } from "./utils";
 
 /**
@@ -204,10 +203,7 @@ const renderTestSuiteResult = (
         result
           .ele("Output")
           .ele("ErrorInfo")
-          .ele(
-            "Message",
-            sanitizeString(testResult.failureMessages.join("\n")),
-          );
+          .ele("Message", testResult.failureMessages.join("\n"));
       }
 
       // Perform any post processing for this test result.
@@ -258,7 +254,7 @@ const renderTestSuiteResult = (
     result
       .ele("Output")
       .ele("ErrorInfo")
-      .ele("Message", sanitizeString(testSuiteResult.failureMessage));
+      .ele("Message", testSuiteResult.failureMessage);
   }
 };
 
@@ -271,6 +267,7 @@ export const generateTrx = (
   );
 
   const resultBuilder = createXmlBuilder("TestRun", {
+    invalidCharReplacement: "",
     version: "1.0",
     encoding: "UTF-8",
   });
