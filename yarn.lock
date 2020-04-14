@@ -257,16 +257,6 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
-"@jest/console@^25.2.6":
-  version "25.2.6"
-  resolved "https://registry.yarnpkg.com/@jest/console/-/console-25.2.6.tgz#f594847ec8aef3cf27f448abe97e76e491212e97"
-  integrity sha512-bGp+0PicZVCEhb+ifnW9wpKWONNdkhtJsRE7ap729hiAfTvCN6VhGx0s/l/V/skA2pnyqq+N/7xl9ZWfykDpsg==
-  dependencies:
-    "@jest/source-map" "^25.2.6"
-    chalk "^3.0.0"
-    jest-util "^25.2.6"
-    slash "^3.0.0"
-
 "@jest/console@^25.3.0":
   version "25.3.0"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-25.3.0.tgz#33b56b81238427bf3ebe3f7b3378d2f79cdbd409"
@@ -371,17 +361,7 @@
     graceful-fs "^4.2.3"
     source-map "^0.6.0"
 
-"@jest/test-result@^25.1.0":
-  version "25.2.6"
-  resolved "https://registry.yarnpkg.com/@jest/test-result/-/test-result-25.2.6.tgz#f6082954955313eb96f6cabf9fb14f8017826916"
-  integrity sha512-gmGgcF4qz/pkBzyfJuVHo2DA24kIgVQ5Pf/VpW4QbyMLSegi8z+9foSZABfIt5se6k0fFj/3p/vrQXdaOgit0w==
-  dependencies:
-    "@jest/console" "^25.2.6"
-    "@jest/types" "^25.2.6"
-    "@types/istanbul-lib-coverage" "^2.0.0"
-    collect-v8-coverage "^1.0.0"
-
-"@jest/test-result@^25.3.0":
+"@jest/test-result@^25.1.0", "@jest/test-result@^25.3.0":
   version "25.3.0"
   resolved "https://registry.yarnpkg.com/@jest/test-result/-/test-result-25.3.0.tgz#137fab5e5c6fed36e5d40735d1eb029325e3bf06"
   integrity sha512-mqrGuiiPXl1ap09Mydg4O782F3ouDQfsKqtQzIjitpwv3t1cHDwCto21jThw6WRRE+dKcWQvLG70GpyLJICfGw==
@@ -423,17 +403,7 @@
     source-map "^0.6.1"
     write-file-atomic "^3.0.0"
 
-"@jest/types@^25.2.6":
-  version "25.2.6"
-  resolved "https://registry.yarnpkg.com/@jest/types/-/types-25.2.6.tgz#c12f44af9bed444438091e4b59e7ed05f8659cb6"
-  integrity sha512-myJTTV37bxK7+3NgKc4Y/DlQ5q92/NOwZsZ+Uch7OXdElxOg61QYc72fPYNAjlvbnJ2YvbXLamIsa9tj48BmyQ==
-  dependencies:
-    "@types/istanbul-lib-coverage" "^2.0.0"
-    "@types/istanbul-reports" "^1.1.1"
-    "@types/yargs" "^15.0.0"
-    chalk "^3.0.0"
-
-"@jest/types@^25.3.0":
+"@jest/types@^25.2.6", "@jest/types@^25.3.0":
   version "25.3.0"
   resolved "https://registry.yarnpkg.com/@jest/types/-/types-25.3.0.tgz#88f94b277a1d028fd7117bc1f74451e0fc2131e7"
   integrity sha512-UkaDNewdqXAmCDbN2GlUM6amDKS78eCqiw/UmF5nE0mmLTd6moJkiZJML/X52Ke3LH7Swhw883IRXq8o9nWjVw==
@@ -3958,16 +3928,6 @@ jest-snapshot@^25.3.0:
     natural-compare "^1.4.0"
     pretty-format "^25.3.0"
     semver "^6.3.0"
-
-jest-util@^25.2.6:
-  version "25.2.6"
-  resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-25.2.6.tgz#3c1c95cdfd653126728b0ed861a86610e30d569c"
-  integrity sha512-gpXy0H5ymuQ0x2qgl1zzHg7LYHZYUmDEq6F7lhHA8M0eIwDB2WteOcCnQsohl9c/vBKZ3JF2r4EseipCZz3s4Q==
-  dependencies:
-    "@jest/types" "^25.2.6"
-    chalk "^3.0.0"
-    is-ci "^2.0.0"
-    make-dir "^3.0.0"
 
 jest-util@^25.3.0:
   version "25.3.0"
