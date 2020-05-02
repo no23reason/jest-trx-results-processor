@@ -44,7 +44,8 @@ export const getSuitePerTestDuration = (testSuiteResult: TestResult): number =>
     (testSuiteResult.perfStats.end - testSuiteResult.perfStats.start) /
       (testSuiteResult.numPassingTests +
         testSuiteResult.numFailingTests +
-        testSuiteResult.numPendingTests),
+        testSuiteResult.numPendingTests +
+        testSuiteResult.numTodoTests),
   );
 
 export const getEnvInfo = (
