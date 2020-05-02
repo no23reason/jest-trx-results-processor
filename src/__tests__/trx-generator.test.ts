@@ -249,6 +249,61 @@ describe("trx-generator", (): void => {
     expect(result).toBeTruthy();
   });
 
+  it("handles todo tests", (): void => {
+    const input: AggregatedResult = {
+      numFailedTestSuites: 0,
+      numFailedTests: 0,
+      numPassedTestSuites: 0,
+      numPassedTests: 0,
+      numPendingTestSuites: 0,
+      numPendingTests: 0,
+      numRuntimeErrorTestSuites: 0,
+      numTodoTests: 1,
+      numTotalTestSuites: 1,
+      numTotalTests: 1,
+      openHandles: [],
+      snapshot: emptySnapshotSummary,
+      startTime: 1511376995239,
+      success: true,
+      testResults: [
+        {
+          leaks: false,
+          numFailingTests: 0,
+          numPassingTests: 0,
+          numPendingTests: 0,
+          numTodoTests: 1,
+          openHandles: [],
+          perfStats: {
+            end: 1511376996104,
+            start: 1511376995923,
+          },
+          snapshot: emptySnapshot,
+          testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
+          testResults: [
+            {
+              ancestorTitles: [],
+              duration: 0,
+              failureMessages: [],
+              fullName: "first",
+              numPassingAsserts: 0,
+              status: "todo",
+              title: "first",
+              location: {
+                column: 0,
+                line: 0,
+              },
+            },
+          ],
+          sourceMaps: {},
+          skipped: true,
+        },
+      ],
+      wasInterrupted: false,
+    };
+    const result = generateTrx(input);
+    expect(result).toBeTruthy();
+  });
+
   it("verify runtime suite failures", done => {
     const input: AggregatedResult = {
       numFailedTestSuites: 0,
