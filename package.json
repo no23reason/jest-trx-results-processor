@@ -29,6 +29,7 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
+    "mkdirp": "^1.0.3",
     "uuid": "^7.0.0",
     "xmlbuilder": "^15.1.0"
   },
@@ -44,7 +45,6 @@
     "cz-conventional-changelog": "^3.1.0",
     "eslint": "^6.8.0",
     "jest": "^25.1.0",
-    "mkdirp": "^1.0.3",
     "semantic-release": "^17.0.4",
     "ts-jest": "^25.2.1",
     "typescript": "^3.7.2",
