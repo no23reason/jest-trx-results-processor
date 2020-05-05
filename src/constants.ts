@@ -7,6 +7,7 @@ export const testOutcomeTable: { [outcome: string]: string } = {
   failed: "Failed",
   passed: "Passed",
   pending: "NotExecuted",
+  todo: "NotExecuted",
 };
 
 export const defaultOutputFile = "test-results.trx";
