@@ -70,6 +70,8 @@ var renderTestSuiteResult = function (testSuiteResult, testDefinitionsNode, test
             var executionId = uuid.v4();
             var fullTestName = utils_1.getFullTestName(testResult);
             var fullTestPath = path.basename(testSuiteResult.testFilePath);
+
+            var filepath = path.relative("./", testSuiteResult.testFilePath);
             // UnitTest
             var unitTest = testDefinitionsNode
                 .ele("UnitTest")
@@ -78,7 +80,7 @@ var renderTestSuiteResult = function (testSuiteResult, testDefinitionsNode, test
             unitTest.ele("Execution").att("id", executionId);
             unitTest
                 .ele("TestMethod")
-                .att("codeBase", fullTestPath + " : " + testSuiteResult.testFilePath)
+                .att("codeBase", fullTestPath + " : " + filepath)
                 .att("name", fullTestName)
                 .att("className", utils_1.getTestClassName(testResult));
             // TestEntry
