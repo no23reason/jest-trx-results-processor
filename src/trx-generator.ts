@@ -165,7 +165,7 @@ const renderTestSuiteResult = (
       unitTest.ele("Execution").att("id", executionId);
       unitTest
         .ele("TestMethod")
-        .att("codeBase", `Jest_${fullTestPath}`)
+        .att("codeBase", fullTestPath + " : " + testSuiteResult.testFilePath)
         .att("name", fullTestName)
         .att("className", getTestClassName(testResult));
 

@@ -78,7 +78,7 @@ var renderTestSuiteResult = function (testSuiteResult, testDefinitionsNode, test
             unitTest.ele("Execution").att("id", executionId);
             unitTest
                 .ele("TestMethod")
-                .att("codeBase", "Jest_" + fullTestPath)
+                .att("codeBase", fullTestPath + " : " + testSuiteResult.testFilePath)
                 .att("name", fullTestName)
                 .att("className", utils_1.getTestClassName(testResult));
             // TestEntry
