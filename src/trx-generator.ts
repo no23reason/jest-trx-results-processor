@@ -155,10 +155,7 @@ const renderTestSuiteResult = (
       const testId = uuidv4();
       const executionId = uuidv4();
       const fullTestName = getFullTestName(testResult);
-
-      // Build variables for suite name
-      const filepath = path.relative('./', testSuiteResult.testFilePath);
-      const filename = path.basename(filepath);
+      const fullTestPath = path.basename(testSuiteResult.testFilePath);
 
       // UnitTest
       const unitTest = testDefinitionsNode
@@ -168,8 +165,7 @@ const renderTestSuiteResult = (
       unitTest.ele("Execution").att("id", executionId);
       unitTest
         .ele("TestMethod")
-        //.att("codeBase", `Jest_${fullTestName}`)
-        .att("codeBase", filepath + " : " + filename)
+        .att("codeBase", `Jest_${fullTestPath}`)
         .att("name", fullTestName)
         .att("className", getTestClassName(testResult));
 
@@ -226,10 +222,6 @@ const renderTestSuiteResult = (
     const fullTestName = path.basename(testSuiteResult.testFilePath);
     const time = new Date().toISOString();
 
-    // Build variables for suite name
-    const filepath = path.relative('./', testSuiteResult.testFilePath);
-    const filename = path.basename(filepath);
-
     // Failed TestSuite
     const unitTest = testDefinitionsNode
       .ele("UnitTest")
@@ -238,8 +230,7 @@ const renderTestSuiteResult = (
     unitTest.ele("Execution").att("id", executionId);
     unitTest
       .ele("TestMethod")
-      //.att("codeBase", `Jest_${fullTestName}`)
-      .att("codeBase", filepath + " : " + filename)
+      .att("codeBase", `Jest_${fullTestName}`)
       .att("name", fullTestName)
       .att("className", fullTestName);
     // TestEntry
