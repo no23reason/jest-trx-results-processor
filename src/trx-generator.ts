@@ -155,10 +155,7 @@ const renderTestSuiteResult = (
       const testId = uuidv4();
       const executionId = uuidv4();
       const fullTestName = getFullTestName(testResult);
-      const fullTestPath = path.basename(testSuiteResult.testFilePath);
-
       const filepath = path.relative("./", testSuiteResult.testFilePath);
-
 
       // UnitTest
       const unitTest = testDefinitionsNode
@@ -168,7 +165,7 @@ const renderTestSuiteResult = (
       unitTest.ele("Execution").att("id", executionId);
       unitTest
         .ele("TestMethod")
-        .att("codeBase", fullTestPath + " : " + filepath)
+        .att("codeBase", filepath)
         .att("name", fullTestName)
         .att("className", getTestClassName(testResult));
 
