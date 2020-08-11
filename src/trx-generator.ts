@@ -155,7 +155,6 @@ const renderTestSuiteResult = (
       const testId = uuidv4();
       const executionId = uuidv4();
       const fullTestName = getFullTestName(testResult);
-      const filepath = path.relative("./", testSuiteResult.testFilePath);
 
       // UnitTest
       const unitTest = testDefinitionsNode
@@ -165,7 +164,7 @@ const renderTestSuiteResult = (
       unitTest.ele("Execution").att("id", executionId);
       unitTest
         .ele("TestMethod")
-        .att("codeBase", filepath)
+        .att("codeBase", `Jest_${fullTestName}`)
         .att("name", fullTestName)
         .att("className", getTestClassName(testResult));
 
