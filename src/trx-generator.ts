@@ -161,7 +161,8 @@ const renderTestSuiteResult = (
       const unitTest = testDefinitionsNode
         .ele("UnitTest")
         .att("name", fullTestName)
-        .att("id", testId);
+        .att("id", testId)
+        .att("storage", filepath);
       unitTest.ele("Execution").att("id", executionId);
       unitTest
         .ele("TestMethod")
@@ -221,16 +222,18 @@ const renderTestSuiteResult = (
     const executionId = uuidv4();
     const fullTestName = path.basename(testSuiteResult.testFilePath);
     const time = new Date().toISOString();
+    const filepath = path.relative("./", testSuiteResult.testFilePath);
 
     // Failed TestSuite
     const unitTest = testDefinitionsNode
       .ele("UnitTest")
       .att("name", fullTestName)
-      .att("id", testId);
+      .att("id", testId)
+      .att("storage", filepath);
     unitTest.ele("Execution").att("id", executionId);
     unitTest
       .ele("TestMethod")
-      .att("codeBase", `Jest_${fullTestName}`)
+      .att("codeBase", filepath)
       .att("name", fullTestName)
       .att("className", fullTestName);
     // TestEntry
