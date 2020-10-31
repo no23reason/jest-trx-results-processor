@@ -54,7 +54,7 @@ const renderTestRun = (
   builder: XMLElement,
   testRunResult: AggregatedResult,
   computerName: string,
-  userName?: string,
+  userName: string,
 ): void => {
   builder
     .att("id", uuidv4())
@@ -141,6 +141,7 @@ const renderTestSuiteResult = (
   computerName: string,
   postProcessTestResult?: [
     (
+      // eslint-disable-next-line no-shadow
       testSuiteResult: TestResult,
       testResult: AssertionResult,
       testResultNode: XMLElement,

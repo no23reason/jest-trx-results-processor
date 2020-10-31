@@ -14,16 +14,13 @@ export const formatDuration = (duration: number): string => {
   durationInner -= h * 3600000;
   const d = durationInner / 86400000;
 
-  return (
-    (d > 0 ? d + "." : "") +
-    (h < 10 ? "0" + h : h) +
-    ":" +
-    (m < 10 ? "0" + m : m) +
-    ":" +
-    (s < 10 ? "0" + s : s) +
-    "." +
-    (ms < 10 ? "00" + ms : ms < 100 ? "0" + ms : ms)
-  );
+  const dayPart = d > 0 ? `${d}.` : "";
+  const hours = h.toString().padStart(2, "0");
+  const minutes = m.toString().padStart(2, "0");
+  const seconds = s.toString().padStart(2, "0");
+  const milliseconds = ms.toString().padStart(3, "0");
+
+  return `${dayPart + hours}:${minutes}:${seconds}.${milliseconds}`;
 };
 
 // Auxillary test data functions
