@@ -65,6 +65,8 @@ describe("trx-generator", (): void => {
           perfStats: {
             start: 1478771929,
             end: 1478778929,
+            runtime: 0,
+            slow: false,
           },
           skipped: false,
           snapshot: emptySnapshot,
@@ -81,6 +83,7 @@ describe("trx-generator", (): void => {
                 column: 0,
                 line: 0,
               },
+              failureDetails: [],
             },
             {
               ancestorTitles: ["foo's", "bar method"],
@@ -93,6 +96,7 @@ describe("trx-generator", (): void => {
                 column: 0,
                 line: 0,
               },
+              failureDetails: [],
             },
           ],
         },
@@ -158,6 +162,8 @@ describe("trx-generator", (): void => {
           perfStats: {
             start: 1478771929,
             end: 1478778929,
+            runtime: 0,
+            slow: false,
           },
           testFilePath: "C:\\testPath\\test.js",
           testResults: [
@@ -172,6 +178,7 @@ describe("trx-generator", (): void => {
                 column: 0,
                 line: 0,
               },
+              failureDetails: [],
             },
             {
               ancestorTitles: ["foo's", "bar method"],
@@ -184,6 +191,7 @@ describe("trx-generator", (): void => {
                 column: 0,
                 line: 0,
               },
+              failureDetails: [],
             },
           ],
         },
@@ -221,6 +229,8 @@ describe("trx-generator", (): void => {
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
+            runtime: 181,
+            slow: false,
           },
           snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
@@ -237,6 +247,7 @@ describe("trx-generator", (): void => {
                 column: 0,
                 line: 0,
               },
+              failureDetails: [],
             },
           ],
           sourceMaps: {},
@@ -276,6 +287,8 @@ describe("trx-generator", (): void => {
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
+            runtime: 181,
+            slow: false,
           },
           snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
@@ -292,6 +305,7 @@ describe("trx-generator", (): void => {
                 column: 0,
                 line: 0,
               },
+              failureDetails: [],
             },
           ],
           sourceMaps: {},
@@ -304,7 +318,7 @@ describe("trx-generator", (): void => {
     expect(result).toBeTruthy();
   });
 
-  it("verify runtime suite failures", done => {
+  it("verify runtime suite failures", (done) => {
     const input: AggregatedResult = {
       numFailedTestSuites: 0,
       numFailedTests: 0,
@@ -331,6 +345,8 @@ describe("trx-generator", (): void => {
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
+            runtime: 181,
+            slow: false,
           },
           snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
@@ -347,6 +363,7 @@ describe("trx-generator", (): void => {
                 column: 0,
                 line: 0,
               },
+              failureDetails: [],
             },
           ],
           sourceMaps: {},
@@ -363,6 +380,8 @@ describe("trx-generator", (): void => {
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
+            runtime: 181,
+            slow: false,
           },
           snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec2.js",
@@ -422,7 +441,7 @@ describe("trx-generator", (): void => {
     });
   });
 
-  it("verify postprocess handler", done => {
+  it("verify postprocess handler", (done) => {
     const input: AggregatedResult = {
       numFailedTestSuites: 0,
       numFailedTests: 0,
@@ -449,6 +468,8 @@ describe("trx-generator", (): void => {
           perfStats: {
             end: 1511376996104,
             start: 1511376995923,
+            runtime: 181,
+            slow: false,
           },
           snapshot: emptySnapshot,
           testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
@@ -465,6 +486,7 @@ describe("trx-generator", (): void => {
                 column: 0,
                 line: 0,
               },
+              failureDetails: [],
             },
           ],
           sourceMaps: {},
