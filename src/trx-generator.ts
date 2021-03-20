@@ -7,6 +7,7 @@ import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { create as createXmlBuilder, XMLElement } from "xmlbuilder";
 
+import TrxAttachmentNodeEnvironment from './test-environment';
 import {
   testListAllLoadedResultsId,
   testListNotInListId,
@@ -155,7 +156,7 @@ const renderTestSuiteResult = (
     testSuiteResult.testResults.forEach((testResult, index) => {
       const testId = uuidv4();
       const executionId = uuidv4();
-      const fullTestName = getFullTestName(testResult);
+      const fullTestName = getFullTestName(testResult.ancestorTitles, testResult.title);
       const filepath = path.relative("./", testSuiteResult.testFilePath);
 
       // UnitTest
@@ -207,6 +208,19 @@ const renderTestSuiteResult = (
           .ele("Output")
           .ele("ErrorInfo")
           .ele("Message", testResult.failureMessages.join("\n"));
+      }
+
+      // TODO: use test start time as last index, to handle multi-run cases
+      let attachmentPaths = TrxAttachmentNodeEnvironment.fileAttachmentInfoList?.[filepath]?.[fullTestName]?.[0];
+      if (attachmentPaths && attachmentPaths.length) {
+        const resultFiles = result
+          .ele("ResultFiles");
+
+        attachmentPaths.forEach(attachmentPath => {
+          resultFiles
+            .ele("ResultFile")
+            .att("path", attachmentPath);
+        });
       }
 
       // Perform any post processing for this test result.
