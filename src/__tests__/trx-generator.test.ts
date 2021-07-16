@@ -55,7 +55,6 @@ describe("trx-generator", (): void => {
       snapshot: emptySnapshotSummary,
       testResults: [
         {
-          failureMessage: "This did not go as planned",
           coverage: {},
           leaks: false,
           numFailingTests: 1,
@@ -151,7 +150,6 @@ describe("trx-generator", (): void => {
       snapshot: emptySnapshotSummary,
       testResults: [
         {
-          failureMessage: "This did not go as planned\uDFFF",
           coverage: {},
           leaks: false,
           numFailingTests: 1,
