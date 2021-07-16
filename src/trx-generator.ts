@@ -220,7 +220,8 @@ const renderTestSuiteResult = (
 
   if (testSuiteResult.failureMessage) {
     // For suites that failed to run, we will generate a test result that documents the failure.
-    // This occurs when there is a failure compiling/loading the suite or an assertion in a before/after hook fails, not when a test in the suite fails.
+    // This occurs when there is a failure compiling/loading the suite or an assertion in a before/after hook fails,
+    // not when a test in the suite fails.
     const testId = uuidv4();
     const executionId = uuidv4();
     const fullTestName = path.basename(testSuiteResult.testFilePath);
