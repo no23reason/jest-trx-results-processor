@@ -388,6 +388,10 @@ describe("trx-generator", (): void => {
           testResults: [],
           sourceMaps: {},
           skipped: false,
+          testExecError: {
+            message: '',
+            stack: 'Failing stack',
+          }
         },
       ],
       wasInterrupted: false,
@@ -435,7 +439,7 @@ describe("trx-generator", (): void => {
       expect(
         parsed.TestRun.Results[0].UnitTestResult[1].Output[0].ErrorInfo[0]
           .Message[0],
-      ).toEqual("Test suite failed with runtime error");
+      ).toEqual("Failing stack");
 
       done();
     });
@@ -492,6 +496,10 @@ describe("trx-generator", (): void => {
           ],
           sourceMaps: {},
           skipped: false,
+          testExecError: {
+            message: '',
+            stack: 'Failing stack',
+          }
         },
       ],
       wasInterrupted: false,
@@ -539,7 +547,7 @@ describe("trx-generator", (): void => {
       expect(
         parsed.TestRun.Results[0].UnitTestResult[1].Output[0].ErrorInfo[0]
           .Message[0],
-      ).toEqual("Test suite failed with runtime error");
+      ).toEqual("Failing stack");
 
       done();
     });

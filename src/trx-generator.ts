@@ -218,7 +218,7 @@ const renderTestSuiteResult = (
     });
   }
 
-  if (testSuiteResult.failureMessage) {
+  if (testSuiteResult.testExecError?.stack) {
     // For suites that failed to run, we will generate a test result that documents the failure.
     // This occurs when there is a failure compiling/loading the suite or an assertion in a before/after hook fails,
     // not when a test in the suite fails.
@@ -262,7 +262,7 @@ const renderTestSuiteResult = (
     result
       .ele("Output")
       .ele("ErrorInfo")
-      .ele("Message", testSuiteResult.failureMessage);
+      .ele("Message", testSuiteResult.testExecError.stack);
   }
 };
 
