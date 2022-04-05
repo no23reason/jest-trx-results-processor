@@ -17,7 +17,6 @@ import {
   formatDuration,
   getEnvInfo,
   getFullTestName,
-  getSuitePerTestDuration,
   getTestClassName,
 } from "./utils";
 
@@ -148,15 +147,14 @@ const renderTestSuiteResult = (
     ) => void,
   ],
 ): void => {
-  const perTestDuration = getSuitePerTestDuration(testSuiteResult);
-  const perTestDurationFormatted = formatDuration(perTestDuration);
-
   if (testSuiteResult.testResults && testSuiteResult.testResults.length) {
-    testSuiteResult.testResults.forEach((testResult, index) => {
+    let runningDuration = 0;
+    testSuiteResult.testResults.forEach((testResult) => {
       const testId = uuidv4();
       const executionId = uuidv4();
       const fullTestName = getFullTestName(testResult);
       const filepath = path.relative("./", testSuiteResult.testFilePath);
+      const duration = testResult.duration || 0;
 
       // UnitTest
       const unitTest = testDefinitionsNode
@@ -185,22 +183,24 @@ const renderTestSuiteResult = (
         .att("executionId", executionId)
         .att("testName", fullTestName)
         .att("computerName", computerName)
-        .att("duration", perTestDurationFormatted)
+        .att("duration", formatDuration(duration))
         .att(
           "startTime",
           new Date(
-            testSuiteResult.perfStats.start + index * perTestDuration,
+            testSuiteResult.perfStats.start + runningDuration,
           ).toISOString(),
         )
         .att(
           "endTime",
           new Date(
-            testSuiteResult.perfStats.start + (index + 1) * perTestDuration,
+            testSuiteResult.perfStats.start + runningDuration,
           ).toISOString(),
         )
         .att("testType", testType)
         .att("outcome", testOutcomeTable[testResult.status])
         .att("testListId", testListNotInListId);
+
+      runningDuration += duration;
 
       if (testResult.status === "failed") {
         result
