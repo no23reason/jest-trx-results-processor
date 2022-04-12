@@ -84,6 +84,7 @@ describe("trx-generator", (): void => {
                 line: 0,
               },
               failureDetails: [],
+              duration: 4100,
             },
             {
               ancestorTitles: ["foo's", "bar method"],
@@ -97,6 +98,7 @@ describe("trx-generator", (): void => {
                 line: 0,
               },
               failureDetails: [],
+              duration: 2900,
             },
           ],
         },
@@ -119,13 +121,13 @@ describe("trx-generator", (): void => {
         "Passed",
       );
       expect(parsed.TestRun.Results[0].UnitTestResult[0].$.duration).toEqual(
-        "00:00:03.500",
+        "00:00:04.100",
       );
       expect(parsed.TestRun.Results[0].UnitTestResult[1].$.outcome).toEqual(
         "Failed",
       );
       expect(parsed.TestRun.Results[0].UnitTestResult[1].$.duration).toEqual(
-        "00:00:03.500",
+        "00:00:02.900",
       );
 
       done();
@@ -179,6 +181,7 @@ describe("trx-generator", (): void => {
                 line: 0,
               },
               failureDetails: [],
+              duration: 4100,
             },
             {
               ancestorTitles: ["foo's", "bar method"],
@@ -192,6 +195,7 @@ describe("trx-generator", (): void => {
                 line: 0,
               },
               failureDetails: [],
+              duration: 2900,
             },
           ],
         },
@@ -237,7 +241,7 @@ describe("trx-generator", (): void => {
           testResults: [
             {
               ancestorTitles: [],
-              duration: 0,
+              duration: 181,
               failureMessages: [],
               fullName: "first",
               numPassingAsserts: 0,
@@ -295,7 +299,7 @@ describe("trx-generator", (): void => {
           testResults: [
             {
               ancestorTitles: [],
-              duration: 0,
+              duration: 181,
               failureMessages: [],
               fullName: "first",
               numPassingAsserts: 0,
@@ -353,7 +357,7 @@ describe("trx-generator", (): void => {
           testResults: [
             {
               ancestorTitles: [],
-              duration: 0,
+              duration: 181,
               failureMessages: [],
               fullName: "first",
               numPassingAsserts: 0,
@@ -481,7 +485,7 @@ describe("trx-generator", (): void => {
           testResults: [
             {
               ancestorTitles: [],
-              duration: 0,
+              duration: 181,
               failureMessages: [],
               fullName: "first",
               numPassingAsserts: 0,
@@ -588,7 +592,7 @@ describe("trx-generator", (): void => {
           testResults: [
             {
               ancestorTitles: [],
-              duration: 0,
+              duration: 181,
               failureMessages: [],
               fullName: "first",
               numPassingAsserts: 0,

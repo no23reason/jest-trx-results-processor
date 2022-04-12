@@ -1,4 +1,4 @@
-import { AssertionResult, TestResult } from "@jest/test-result";
+import { AssertionResult } from "@jest/test-result";
 import * as os from "os";
 
 // Adapted from https://github.com/hatchteam/karma-trx-reporter
@@ -33,17 +33,6 @@ export const getTestClassName = (testResult: AssertionResult): string =>
   testResult.ancestorTitles && testResult.ancestorTitles.length
     ? testResult.ancestorTitles[0]
     : "No suite";
-
-export const getSuitePerTestDuration = (testSuiteResult: TestResult): number =>
-  // take the total duration of suite and divide it by the number of tests
-  // (Jest does not provide per test performance info)
-  Math.floor(
-    (testSuiteResult.perfStats.end - testSuiteResult.perfStats.start) /
-      (testSuiteResult.numPassingTests +
-        testSuiteResult.numFailingTests +
-        testSuiteResult.numPendingTests +
-        testSuiteResult.numTodoTests),
-  );
 
 export const getEnvInfo = (
   defaultUserName = "anonymous",
