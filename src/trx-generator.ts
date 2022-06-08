@@ -187,7 +187,7 @@ const renderTestSuiteResult = (
         .att(
           "startTime",
           new Date(
-            testSuiteResult.perfStats.start + runningDuration,
+            testSuiteResult.perfStats.start,
           ).toISOString(),
         )
         .att(
