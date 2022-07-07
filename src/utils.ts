@@ -24,10 +24,10 @@ export const formatDuration = (duration: number): string => {
 };
 
 // Auxillary test data functions
-export const getFullTestName = (testResult: AssertionResult): string =>
-  testResult.ancestorTitles && testResult.ancestorTitles.length
-    ? `${testResult.ancestorTitles.join(" / ")} / ${testResult.title}`
-    : testResult.title;
+export const getFullTestName = (ancestorTitles: string[], testResultTitle: string): string =>
+  ancestorTitles && ancestorTitles.length
+    ? `${ancestorTitles.join(" / ")} / ${testResultTitle}`
+    : testResultTitle;
 
 export const getTestClassName = (testResult: AssertionResult): string =>
   testResult.ancestorTitles && testResult.ancestorTitles.length
