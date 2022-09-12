@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "mkdirp": "^1.0.3",
-    "uuid": "^8.0.0",
+    "uuid": "^9.0.0",
     "xmlbuilder": "^15.1.0"
   },
   "devDependencies": {
