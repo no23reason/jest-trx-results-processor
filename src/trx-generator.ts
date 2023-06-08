@@ -79,12 +79,15 @@ const renderTimes = (
   testRunResult: AggregatedResult,
 ): void => {
   const startTime = new Date(testRunResult.startTime).toISOString();
+  const totalDuration = testRunResult.testResults.reduce((acc, tr) => acc + tr.perfStats.runtime, 0);
+  const finishTime = new Date(testRunResult.startTime + totalDuration).toISOString();
+
   parentNode
     .ele("Times")
     .att("creation", startTime)
     .att("queuing", startTime)
     .att("start", startTime)
-    .att("finish", startTime);
+    .att("finish", finishTime);
 };
 
 const renderResultSummary = (
