@@ -646,4 +646,112 @@ describe("trx-generator", (): void => {
       done();
     });
   });
+
+  it("calculate finishTime from test results", (done) => {
+    const input: AggregatedResult = {
+      numFailedTestSuites: 0,
+      numFailedTests: 0,
+      numPassedTestSuites: 1,
+      numPassedTests: 1,
+      numPendingTestSuites: 0,
+      numPendingTests: 0,
+      numRuntimeErrorTestSuites: 1,
+      numTodoTests: 0,
+      numTotalTestSuites: 2,
+      numTotalTests: 1,
+      openHandles: [],
+      snapshot: emptySnapshotSummary,
+      startTime: 1511376995239,
+      success: false,
+      testResults: [
+        {
+          leaks: false,
+          numFailingTests: 0,
+          numPassingTests: 1,
+          numPendingTests: 0,
+          numTodoTests: 0,
+          openHandles: [],
+          perfStats: {
+            end: 1511376996104,
+            start: 1511376995923,
+            runtime: 181,
+            slow: false,
+          },
+          snapshot: emptySnapshot,
+          testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
+          testResults: [
+            {
+              ancestorTitles: [],
+              duration: 181,
+              failureMessages: [],
+              fullName: "first",
+              numPassingAsserts: 0,
+              status: "passed",
+              title: "first",
+              location: {
+                column: 0,
+                line: 0,
+              },
+              failureDetails: [],
+            },
+          ],
+          sourceMaps: {},
+          skipped: false,
+        },
+        {
+          leaks: false,
+          numFailingTests: 0,
+          numPassingTests: 1,
+          numPendingTests: 0,
+          numTodoTests: 0,
+          openHandles: [],
+          perfStats: {
+            end: 1511376996304,
+            start: 1511376996104,
+            runtime: 200,
+            slow: false,
+          },
+          snapshot: emptySnapshot,
+          testFilePath: "C:\\Users\\Github\\test\\test.spec.js",
+          testResults: [
+            {
+              ancestorTitles: [],
+              duration: 181,
+              failureMessages: [],
+              fullName: "first",
+              numPassingAsserts: 0,
+              status: "passed",
+              title: "first",
+              location: {
+                column: 0,
+                line: 0,
+              },
+              failureDetails: [],
+            },
+          ],
+          sourceMaps: {},
+          skipped: false,
+        },
+      ],
+      wasInterrupted: false,
+    };
+
+    const result = generateTrx(input);
+
+    xml2js.parseString(result, (err, parsed) => {
+      expect(err).toBeFalsy();
+      expect(parsed).toBeTruthy();
+      expect(parsed.TestRun).toBeTruthy();
+
+      const timeElement = parsed.TestRun.Times[0].$;
+      expect(timeElement).toBeTruthy();
+      expect(timeElement.start).toBeTruthy();
+      expect(timeElement.finish).toBeTruthy();
+      expect(timeElement.start).not.toEqual(timeElement.finish);
+      expect(timeElement.start).toEqual(new Date(1511376995239).toISOString());
+      expect(timeElement.finish).toEqual(new Date(1511376995239 + 200 + 181).toISOString());
+
+      done();
+    });
+  });
 });
